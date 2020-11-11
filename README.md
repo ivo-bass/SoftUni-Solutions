@@ -3,6 +3,17 @@
 Solutions in PYTHON for SoftUni (Software University) courses.
 
 
+# Programming Basics
+
+https://github.com/ivo-bass/SoftUni-Solutions/tree/master/programming_basics
+
+
+# Programming Fundamentals
+
+https://github.com/ivo-bass/SoftUni-Solutions/tree/master/programming_fundamentals
+
+
+
 # Exercise / Упражнение
 
 These are my solutions for the exercises in my education in SoftUni.
