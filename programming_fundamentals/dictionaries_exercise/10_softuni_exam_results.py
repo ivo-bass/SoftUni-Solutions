@@ -30,10 +30,11 @@ class Exam:
 
 	def get_statistics(self):
 		self.sort_results()
-		self.sort_submissions()
 		print("Results:")
 		for name, points in self.max_results.items():
 			print(f"{name} | {points}")
+
+		self.sort_submissions()
 		print("Submissions:")
 		for lang, count in self.submissions.items():
 			print(f"{lang} - {count}")
