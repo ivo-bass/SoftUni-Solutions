@@ -21,12 +21,10 @@ class Exam:
 			self.max_results[name] = points
 
 	def sort_results(self):
-		self.max_results = dict(sorted(self.max_results.items(), key=lambda x: x[0]))
-		self.max_results = dict(sorted(self.max_results.items(), key=lambda x: x[1], reverse=True))
+		self.max_results = dict(sorted(self.max_results.items(), key=lambda x: (-x[1], x[0])))
 
 	def sort_submissions(self):
-		self.submissions = dict(sorted(self.submissions.items(), key=lambda x: x[0]))
-		self.submissions = dict(sorted(self.submissions.items(), key=lambda x: x[1], reverse=True))
+		self.submissions = dict(sorted(self.submissions.items(), key=lambda x: (-x[1], x[0])))
 
 	def get_statistics(self):
 		self.sort_results()
