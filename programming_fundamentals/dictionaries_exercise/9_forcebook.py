@@ -22,9 +22,12 @@ class ForceBook:
 					self.sides[side].append(user)
 				break
 
-	def get_info(self):
+	def sort_sides(self):
 		self.sides = dict(sorted(self.sides.items(), key=lambda x: x[0]))
 		self.sides = dict(sorted(self.sides.items(), key=lambda x: len(x[1]), reverse=True))
+
+	def get_info(self):
+		self.sort_sides()
 		for side, users in self.sides.items():
 			count = len(users)
 			if count > 0:
