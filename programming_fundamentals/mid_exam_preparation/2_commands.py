@@ -24,12 +24,10 @@ def main():
 		command = data.split()
 		action = command[0]
 		if action == "reverse":
-			start, count = command[2], command[4]
-			start, count = int(start), int(count)
+			start, count = int(command[2]), int(command[4])
 			seq.reverse_seq(start, count)
 		elif action == "sort":
-			start, count = command[2], command[4]
-			start, count = int(start), int(count)
+			start, count = int(command[2]), int(command[4])
 			seq.sort_seq(start, count)
 		elif action == "remove":
 			count = int(command[1])
