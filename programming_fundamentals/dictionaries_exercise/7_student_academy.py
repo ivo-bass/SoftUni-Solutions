@@ -1,47 +1,47 @@
+class Student:
+	def __init__(self, name, grade):
+		self.name = name
+		self.grades = [grade]
+		self.average_grade = grade
+		self.is_top_student = True if self.average_grade >= 4.5 else False
+
+	def calc_avrg_grade(self):
+		self.average_grade = sum(self.grades) / len(self.grades) if len(self.grades) > 0 else 0
+		if self.average_grade >= 4.5:
+			self.is_top_student = True
+		else:
+			self.is_top_student = False
+
+
 class DataBase:
 	def __init__(self):
-		self.all_students_grades = {}
-		self.high_grade = {}
+		self.students = []
+		self.top_students = []
 
-	def add_student(self, name):
-		self.all_students_grades[name] = []
-
-	def add_grade(self, name, grade):
-		self.all_students_grades[name].append(grade)
-
-	def get_average_grade(self):
-		for name, grades in self.all_students_grades.items():
-			average = sum(grades) / len(grades)
-			self.high_grade[name] = average
-
-	def filter_students(self):
-		self.high_grade = dict(filter(lambda item: item[1] >= 4.5, self.high_grade.items()))
+	def add_info(self, name, grade):
+		if self.students:
+			for student in self.students:
+				if student.name == name:
+					student.grades.append(grade)
+					student.calc_avrg_grade()
+					return
+		self.students.append(Student(name, grade))
 
 	def sort_students(self):
-		self.high_grade = dict(sorted(self.high_grade.items(), key=lambda item: item[1], reverse=True))
+		self.top_students = [cl for cl in self.students if cl.is_top_student]
+		self.top_students = sorted(self.top_students, key=lambda x: -x.average_grade)
 
 	def print_students(self):
-		for name, grade in self.high_grade.items():
-			print(f"{name} -> {grade:.2f}")
+		self.sort_students()
+		for student in self.top_students:
+			print(f"{student.name} -> {student.average_grade:.2f}")
 
 
-def main():
-	db = DataBase()
-	rows = int(input())
-	name = ""
-	for row in range(1, rows * 2 + 1):
-		if not row % 2 == 0:
-			name = input()
-			if name not in db.all_students_grades.keys():
-				db.add_student(name)
-		else:
-			grade = float(input())
-			db.add_grade(name, grade)
-	db.get_average_grade()
-	db.filter_students()
-	db.sort_students()
-	db.print_students()
-
-
-if __name__ == '__main__':
-	main()
+db = DataBase()
+rows = int(input())
+for row in range(1, rows * 2 + 1):
+	if not row % 2 == 0:
+		n = input()
+		gr = float(input())
+		db.add_info(name=n, grade=gr)
+db.print_students()
