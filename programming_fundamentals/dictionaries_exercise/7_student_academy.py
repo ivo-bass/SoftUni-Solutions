@@ -7,10 +7,7 @@ class Student:
 
 	def calc_avrg_grade(self):
 		self.average_grade = sum(self.grades) / len(self.grades) if len(self.grades) > 0 else 0
-		if self.average_grade >= 4.5:
-			self.is_top_student = True
-		else:
-			self.is_top_student = False
+		self.is_top_student = True if self.average_grade >= 4.5 else False
 
 
 class DataBase:
