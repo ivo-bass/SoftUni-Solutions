@@ -9,5 +9,3 @@ morse_code = {
 }
 
 print("".join([morse_code[char] for char in input().split()]))
-
-"""Mmm... Not really."""
