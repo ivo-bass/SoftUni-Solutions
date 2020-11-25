@@ -1,3 +1,5 @@
+#TODO: with match and group["name"]
+
 from re import compile
 
 regex = r">>(?P<name>\w+)<<(?P<price>[0-9]+(\.[0-9]+)?)!(?P<quantity>[0-9]+)"
