@@ -1,15 +1,13 @@
 def take_odd(text):
 	new_text = ""
-	for index, char in enumerate(text):
-		if not index % 2 == 0:
-			new_text += char
+	for index in range(1, len(text), 2):
+		new_text += text[index]
 	print(new_text)
 	return new_text
 
 
 def cut(text, index, length):
-	substring = text[index:index + length]
-	new_text = text.replace(substring, "", 1)
+	new_text = text[:index] + text[index + length:]
 	print(new_text)
 	return new_text
 
