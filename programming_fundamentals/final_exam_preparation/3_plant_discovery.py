@@ -1,0 +1,79 @@
+def rate_plant(dic, pl, rat, invalid):
+	if pl in dic:
+		dic[pl]["ratings"].append(rat)
+	else:
+		invalid = True
+	return dic, invalid
+
+
+def update_plant(dic, pl, new_rarity, invalid):
+	if pl in dic:
+		dic[pl]["rarity"] = new_rarity
+	else:
+		invalid = True
+	return dic, invalid
+
+
+def reset_plant(dic, pl, invalid):
+	if pl in dic:
+		dic[pl]["ratings"] = []
+	else:
+		invalid = True
+	return dic, invalid
+
+
+def calculate_avrg_ratings(dic):
+	for name, values in dic.items():
+		if values["ratings"]:
+			dic[name]["ratings"] = sum(values["ratings"]) / len(values["ratings"])
+		else:
+			dic[name]["ratings"] = 0
+	return dic
+
+
+def print_data(dic):
+	dic = calculate_avrg_ratings(dic)
+	dic = dict(sorted(dic.items(), key=lambda x: (-x[1]["rarity"], -x[1]["ratings"])))
+	print("Plants for the exhibition:")
+	for name, values in dic.items():
+		print(f"- {name}; Rarity: {values['rarity']}; Rating: {values['ratings']:.2f}")
+
+
+def get_input_data():
+	collection = {}
+	n = int(input())
+	for _ in range(n):
+		plant, rarity = input().split("<->")
+		if plant in collection:
+			collection[plant]["rarity"] += int(rarity)
+		else:
+			collection[plant] = {"rarity": int(rarity), "ratings": []}
+	return collection
+
+
+def main():
+	collection = get_input_data()
+	while True:
+		command = input()
+		if command == "Exhibition":
+			print_data(collection)
+			break
+		is_invalid = False
+		action, data = command.split(": ")
+		data = data.split(" - ")
+		if action == "Rate":
+			plant, rating = data[0], int(data[1])
+			collection, is_invalid = rate_plant(collection, plant, rating, is_invalid)
+		elif action == "Update":
+			plant, rarity = data[0], int(data[1])
+			collection, is_invalid = update_plant(collection, plant, rarity, is_invalid)
+		elif action == "Reset":
+			plant = data[0]
+			collection, is_invalid = reset_plant(collection, plant, is_invalid)
+		else:
+			is_invalid = True
+		if is_invalid:
+			print("error")
+
+
+main()
