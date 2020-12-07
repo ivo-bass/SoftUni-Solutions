@@ -1,25 +1,22 @@
-def rate_plant(dic, pl, rat, invalid):
+def rate_plant(dic, pl, rat):
 	if pl in dic:
 		dic[pl]["ratings"].append(rat)
-	else:
-		invalid = True
-	return dic, invalid
+		return dic, False
+	return dic, True
 
 
-def update_plant(dic, pl, new_rarity, invalid):
+def update_plant(dic, pl, new_rarity):
 	if pl in dic:
 		dic[pl]["rarity"] = new_rarity
-	else:
-		invalid = True
-	return dic, invalid
+		return dic, False
+	return dic, True
 
 
-def reset_plant(dic, pl, invalid):
+def reset_plant(dic, pl):
 	if pl in dic:
 		dic[pl]["ratings"] = []
-	else:
-		invalid = True
-	return dic, invalid
+		return dic, False
+	return dic, True
 
 
 def calculate_avrg_ratings(dic):
@@ -58,18 +55,17 @@ def main():
 		if command == "Exhibition":
 			print_data(collection)
 			break
-		is_invalid = False
 		action, data = command.split(": ")
 		data = data.split(" - ")
 		if action == "Rate":
 			plant, rating = data[0], int(data[1])
-			collection, is_invalid = rate_plant(collection, plant, rating, is_invalid)
+			collection, is_invalid = rate_plant(collection, plant, rating)
 		elif action == "Update":
 			plant, rarity = data[0], int(data[1])
-			collection, is_invalid = update_plant(collection, plant, rarity, is_invalid)
+			collection, is_invalid = update_plant(collection, plant, rarity)
 		elif action == "Reset":
 			plant = data[0]
-			collection, is_invalid = reset_plant(collection, plant, is_invalid)
+			collection, is_invalid = reset_plant(collection, plant)
 		else:
 			is_invalid = True
 		if is_invalid:
