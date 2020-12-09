@@ -1,4 +1,4 @@
-class Car(object):
+class Car:
 	def __init__(self, model, mileage, fuel):
 		self.model = model
 		self.mileage = mileage
@@ -28,19 +28,18 @@ class Car(object):
 
 class Race:
 	def __init__(self):
-		self.cars = []
+		self.cars = {}
 
 	def get_cars(self):
 		n = int(input())
 		for _ in range(n):
 			model, mileage, fuel = input().split("|")
-			self.cars.append(Car(model, int(mileage), int(fuel)))
+			self.cars[model] = Car(model, int(mileage), int(fuel))
 
 	def print_cars(self):
-		self.cars = list(sorted(self.cars, key=lambda x: x.model))
-		self.cars = list(sorted(self.cars, key=lambda x: -x.mileage))
-		for car in self.cars:
-			print(f"{car.model} -> Mileage: {car.mileage} kms, Fuel in the tank: {car.fuel} lt.")
+		self.cars = dict(sorted(self.cars.items(), key=lambda x: (-x[1].mileage, x[0])))
+		for obj in self.cars.values():
+			print(f"{obj.model} -> Mileage: {obj.mileage} kms, Fuel in the tank: {obj.fuel} lt.")
 
 
 def main():
@@ -53,25 +52,16 @@ def main():
 		action, *values = command.split(" : ")
 		if action == "Drive":
 			model, distance, fuel = values[0], int(values[1]), int(values[2])
-			for car in race.cars:
-				if car.model == model:
-					car.drive(distance, fuel)
-					if car.mileage >= 100_000:
-						print(f"Time to sell the {car.model}!")
-						race.cars.remove(car)
-					break
+			race.cars[model].drive(distance, fuel)
+			if race.cars[model].mileage >= 100_000:
+				print(f"Time to sell the {model}!")
+				del race.cars[model]
 		elif action == "Refuel":
 			model, fuel = values[0], int(values[1])
-			for car in race.cars:
-				if car.model == model:
-					car.refuel(fuel)
-					break
+			race.cars[model].refuel(fuel)
 		elif action == "Revert":
 			model, kilometers = values[0], int(values[1])
-			for car in race.cars:
-				if car.model == model:
-					car.revert(kilometers)
-					break
+			race.cars[model].revert(kilometers)
 	race.print_cars()
 
 
