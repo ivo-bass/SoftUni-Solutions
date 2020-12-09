@@ -1,3 +1,18 @@
+"""
+3
+Audi A6|38000|62
+Mercedes CLS|11000|35
+Volkswagen Passat CC|45678|5
+Drive : Audi A6 : 543 : 47
+Drive : Mercedes CLS : 94 : 11
+Drive : Volkswagen Passat CC : 69 : 8
+Refuel : Audi A6 : 50
+Revert : Mercedes CLS : 500
+Revert : Audi A6 : 30000
+Stop
+"""
+
+
 class Car:
 	def __init__(self, model, mileage, fuel):
 		self.model = model
@@ -11,6 +26,9 @@ class Car:
 			self.fuel -= fuel
 			self.mileage += distance
 			print(f"{self.model} driven for {distance} kilometers. {fuel} liters of fuel consumed.")
+			if self.mileage >= 100_000:
+				print(f"Time to sell the {self.model}!")
+				race.cars.remove(self.model)
 
 	def refuel(self, fuel):
 		if fuel + self.fuel > 75:
@@ -48,21 +66,19 @@ def main():
 	while True:
 		command = input()
 		if command == "Stop":
+			race.print_cars()
 			break
 		action, *values = command.split(" : ")
 		if action == "Drive":
 			model, distance, fuel = values[0], int(values[1]), int(values[2])
 			race.cars[model].drive(distance, fuel)
-			if race.cars[model].mileage >= 100_000:
-				print(f"Time to sell the {model}!")
-				del race.cars[model]
+		###
 		elif action == "Refuel":
 			model, fuel = values[0], int(values[1])
 			race.cars[model].refuel(fuel)
 		elif action == "Revert":
 			model, kilometers = values[0], int(values[1])
 			race.cars[model].revert(kilometers)
-	race.print_cars()
 
 
 main()
