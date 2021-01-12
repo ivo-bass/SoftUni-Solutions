@@ -8,7 +8,7 @@ for _ in range(pumps_count):
 
 index = 0
 success = False
-while True:
+for _ in range(pumps_count):
     fuel_in_tank = 0
     # copy of the que is needed to operate with
     q_copy = q.copy()
@@ -21,12 +21,11 @@ while True:
         if fuel_in_tank < 0:
             success = False
             break
-        # Otherwise the circle is closed
         success = True
     if success:
         break
-    # If the circle is not closed we try starting from next index
-    q.append(q.popleft())
+    # Rotate left to start from the next index
+    q.rotate(-1)
     index += 1
 print(index)
 
