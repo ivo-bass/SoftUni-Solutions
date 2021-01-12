@@ -25,11 +25,8 @@ while True:
         next_distance = q_d_copy.popleft()
         # Then we add the ammount to the tank
         fuel_in_tank += current_amount
-        # The we extract the distance from the tank
+        # Then we extract the distance from the tank
         fuel_in_tank -= next_distance
-        # After that we add the properties to the end of the que
-        q_f_copy.append(current_amount)
-        q_d_copy.append(next_distance)
         # If the fuel is negative, the tank cannot proceed
         if fuel_in_tank < 0:
             success = False
