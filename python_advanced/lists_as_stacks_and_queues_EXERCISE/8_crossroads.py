@@ -1,5 +1,7 @@
 # TODO: solve with class Car
 
+# This solution gives 85/100 in Judge
+
 from collections import deque
 
 END_COMMAND = 'END'
