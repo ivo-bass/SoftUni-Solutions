@@ -27,9 +27,15 @@ def print_output(s):
 
 END_COMMAND = 'END'
 
-guests_count = int(input())
-guest_list = get_for_input(guests_count)
-guests_arrived = get_while_input(END_COMMAND)
 
-absent_guests = sorted(guest_list - guests_arrived)
-print_output(absent_guests)
+def main():
+    guests_count = int(input())
+    guest_list = get_for_input(guests_count)
+    guests_arrived = get_while_input(END_COMMAND)
+
+    absent_guests = sorted(guest_list - guests_arrived)
+    print_output(absent_guests)
+
+
+if __name__ == '__main__':
+    main()
