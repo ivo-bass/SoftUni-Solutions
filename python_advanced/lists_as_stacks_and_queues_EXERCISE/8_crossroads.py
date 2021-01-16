@@ -1,7 +1,3 @@
-# TODO: solve with class Car
-
-# This solution gives 85/100 in Judge
-
 from collections import deque
 
 END_COMMAND = 'END'
@@ -33,16 +29,18 @@ while not is_crash:
                     cars_passed.append(car)
                     char = ''
         time = 0
-        if passing_car:
-            while time <= free_window_duration:
+        if char:
+            char = passing_car.popleft()
+            while time < free_window_duration:
                 time += 1
-                char = passing_car.popleft()
-                if not passing_car:
+                if passing_car:
+                    char = passing_car.popleft()
+                else:
                     cars_passed.append(car)
                     char = ''
                     break
 
-        if passing_car:
+        if char:
             print(f'A crash happened!')
             print(f'{"".join(car)} was hit at {char}.')
             is_crash = True
