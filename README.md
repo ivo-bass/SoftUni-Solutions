@@ -13,6 +13,10 @@ https://github.com/ivo-bass/SoftUni-Solutions/tree/master/programming_basics
 https://github.com/ivo-bass/SoftUni-Solutions/tree/master/programming_fundamentals
 
 
+# Python Advanced
+
+https://github.com/ivo-bass/SoftUni-Solutions/tree/master/python_advanced
+
 
 # Exercise / Упражнение
 
