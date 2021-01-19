@@ -22,3 +22,20 @@ def get_while_input(endword):
 def print_elements_in_collection(collection):
     for el in collection:
         print(el)
+
+
+# __________________________________________
+MATRIX = []
+LOCAL_TEST = False
+
+
+def get_matrix_input(is_test=LOCAL_TEST):
+    if is_test:
+        matrix = MATRIX
+    else:
+        rows, _ = map(int, input().split(' '))
+        matrix = []
+        for row in range(rows):
+            row = [int(x) for x in input().split(' ')]
+            matrix.append(row)
+    return matrix
