@@ -6,11 +6,11 @@ MATRIX = [
     [3, 7, 11, 2, 8],
     [4, 8, 12, 16, 4],
 ]
-LOCAL_TEST = True  # place as argument in get_matrix_input() to test locally
+LOCAL_TEST = False
 SIZE = 3
 
 
-def get_matrix_input(is_test=False):
+def get_matrix_input(is_test=LOCAL_TEST):
     if is_test:
         matrix = MATRIX
     else:

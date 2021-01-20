@@ -3,10 +3,10 @@ MATRIX = [
     [1, 2, 3],
     [4, 5, 6],
 ]
-LOCAL_TEST = True  # set as get_matrix parameter
+LOCAL_TEST = False
 
 
-def get_matrix(is_test=False):
+def get_matrix(is_test=LOCAL_TEST):
     if is_test:
         matrix = MATRIX
     else:
@@ -33,10 +33,6 @@ def validate_command(comm, mat):
 
 
 def perform_swap(m, x1, y1, x2, y2):
-    # value_1 = m[x1][y1]
-    # value_2 = m[x2][y2]
-    # m[x1][y1] = value_2
-    # m[x2][y2] = value_1
     m[x1][y1], m[x2][y2] = m[x2][y2], m[x1][y1]
     return m
 
