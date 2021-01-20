@@ -73,23 +73,23 @@ def is_valid_cell(m, r, c):
     return 0 <= r < row_size and 0 <= c < col_size
 
 
-def move_player(mat, pos, stat, comm):
-    x, y = pos
-    new_x, new_y = calc_new_position(x, y, comm)
-    if is_valid_cell(mat, new_x, new_y):
-        pos = new_x, new_y
-        cell = mat[new_x][new_y]
+def move_player(matrix, position, status, command):
+    x, y = position
+    new_x, new_y = calc_new_position(x, y, command)
+    if is_valid_cell(matrix, new_x, new_y):
+        position = new_x, new_y
+        cell = matrix[new_x][new_y]
         if cell == BUNNY_CELL:
-            stat = GAME_OVER
-            mat[x][y] = REGULAR_CELL
-            return mat, pos, stat
+            status = GAME_OVER
+            matrix[x][y] = REGULAR_CELL
+            return matrix, position, status
         if cell == REGULAR_CELL:
-            mat[new_x][new_y] = PLAYER_CELL
-            mat[x][y] = REGULAR_CELL
+            matrix[new_x][new_y] = PLAYER_CELL
+            matrix[x][y] = REGULAR_CELL
     else:
-        mat[x][y] = REGULAR_CELL
-        stat = WIN
-    return mat, pos, stat
+        matrix[x][y] = REGULAR_CELL
+        status = WIN
+    return matrix, position, status
 
 
 def find_all_bunnies(matrix):
@@ -126,26 +126,24 @@ def visualize_new_bunnies(matrix, new_bunnies, status, position):
 
 def multiply_bunnies(matrix, status, position, all_bunnies):
     new_bunnies = set()
-    if all_bunnies:
-        for bunny in all_bunnies:
-            x, y = bunny
-            new_bunnies.update(new_bunnies_positions(matrix, x, y))
+    for bunny in all_bunnies:
+        x, y = bunny
+        new_bunnies.update(new_bunnies_positions(matrix, x, y))
 
-        matrix, status = visualize_new_bunnies(
-            matrix, new_bunnies, status, position)
-        all_bunnies.update(new_bunnies)
+    matrix, status = visualize_new_bunnies(
+        matrix, new_bunnies, status, position)
+    all_bunnies.update(new_bunnies)
     return matrix, status, all_bunnies
 
 
 def print_output(matrix, position, status):
     for r in range(len(matrix)):
         print(''.join(matrix[r]))
-    if position:
-        row, col = position
-        if status == GAME_OVER:
-            print(f'{GAME_OVER_MSG} {row} {col}')
-        elif status == WIN:
-            print(f'{WIN_MSG} {row} {col}')
+    row, col = position
+    if status == GAME_OVER:
+        print(f'{GAME_OVER_MSG} {row} {col}')
+    elif status == WIN:
+        print(f'{WIN_MSG} {row} {col}')
 
 
 matrix, commands = get_input()
