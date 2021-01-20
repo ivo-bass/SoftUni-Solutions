@@ -46,7 +46,7 @@ def get_input(is_test=LOCAL_TEST):
         size = int(input())
         commands = input().split(SPLITTER)
         for _ in range(size):
-            row = [x for x in input().split(SPLITTER)]
+            row = input().split(SPLITTER)
             matrix.append(row)
     return matrix, commands
 
@@ -76,9 +76,7 @@ def calc_new_position(x, y, com):
 def is_valid_cell(m, r, c):
     """Check if the given coordinates are in the range of matrix"""
     size = len(m)
-    if 0 <= r < size and 0 <= c < size:
-        return True
-    return False
+    return 0 <= r < size and 0 <= c < size
 
 
 def move(mat, pos, stat, comm):
