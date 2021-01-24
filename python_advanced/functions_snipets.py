@@ -39,3 +39,8 @@ def get_matrix_input(is_test=LOCAL_TEST):
             row = [int(x) for x in input().split(' ')]
             matrix.append(row)
     return matrix
+
+
+def print_matrix(matrix):
+    for row in range(len(matrix)):
+        print(' '.join(matrix[row]))
