@@ -10,7 +10,4 @@ def make_expressions(ll, expression='', currant_sum=0):
 
 
 data = list(map(int, input().split(', ')))
-# data = [1, 1, 1, 1]
-# all_expressions = make_expressions(data)
-
 [print(f'{exp}={res}') for exp, res in make_expressions(data)]
