@@ -15,10 +15,8 @@ def match(f, m, count):
 
 
 def unmatch(f, m, c):
-    if f:
-        f.popleft()
-    if m:
-        m[-1] -= 2
+    f.popleft()
+    m[-1] -= 2
     return f, m, c
 
 
@@ -35,12 +33,13 @@ def check_for_0s(f, m):
 
 def check_for_25s(f, m):
     found = False
-    if not f[0] == 0 and f[0] % 25 == 0:
+    if f[0] % 25 == 0:
         found = True
         f.popleft()
+        # Проверявам дали има още елементи в листа след първия pop()
         if f:
             f.popleft()
-    if not m[-1] == 0 and m[-1] % 25 == 0:
+    if m[-1] % 25 == 0:
         found = True
         m.pop()
         if m:
@@ -57,15 +56,15 @@ def check_for_match(f, m, count):
 
 
 def print_output(f, m, count):
+    m_str = 'none'
+    f_str = 'none'
+
     if m:
         m = m[::-1]
         m_str = ', '.join(map(str, m))
-    else:
-        m_str = 'none'
     if f:
         f_str = ', '.join(map(str, f))
-    else:
-        f_str = 'none'
+
     print(f'Matches: {count}')
     print(f'Males left: {m_str}')
     print(f'Females left: {f_str}')
@@ -77,9 +76,11 @@ def main():
 
     while males and females:
         females, males, is_found = check_for_0s(females, males)
+        # Ако намери нула, трябва да завърти наново цикъла, за да провери пак следващите елементи
         if is_found:
             continue
         females, males, is_found = check_for_25s(females, males)
+        # Ако намери делимо на 25, трябва да завърти наново цикъла, за да провери пак следващите елементи
         if is_found:
             continue
         females, males, matches = check_for_match(females, males, matches)
@@ -87,5 +88,4 @@ def main():
     print_output(females, males, matches)
 
 
-if __name__ == '__main__':
-    main()
+main()
