@@ -1,15 +1,12 @@
+import re
+
 PATH = 'text.txt'
-CHARS_TO_REPLACE = ("-", ",", ".", "!", "?")
+PATTERN = r"[-,!?'.]"
 REPLACEMENT = '@'
 
 
-def replace_bad_chars(ll):
-    replaced = []
-    for l in ll:
-        for ch in CHARS_TO_REPLACE:
-            l = l.replace(ch, REPLACEMENT)
-        replaced.append(l)
-    return replaced
+def replace_bad_chars(line):
+    return re.sub(PATTERN, REPLACEMENT, line)
 
 
 def get_even_lines(ll):
@@ -26,9 +23,8 @@ def print_output(ll):
 
 
 with open(PATH) as file:
-    lines = file.readlines()
-    replaced = replace_bad_chars(lines)
-    even_lines = get_even_lines(replaced)
+    lines = [replace_bad_chars(l) for l in file.readlines()]
+    even_lines = get_even_lines(lines)
     reversed_lines = reverse_order(even_lines)
 
 print_output(reversed_lines)
