@@ -1,26 +1,18 @@
+import string
+
 READ_PATH = 'text.txt'
-WRITE_PATH = 'output,txt'
-PUNCTUATION = ("-", ",", ".", "!", "?", "'")
+WRITE_PATH = 'output.txt'
 
 
-def count_chars(line):
-    return len([ch for ch in line if ch.isalnum()])
+def count_symbols(line, validation):
+    return len([ch for ch in line if ch in validation])
 
 
-def count_punctuation(line):
-    return len([ch for ch in line if ch in PUNCTUATION])
-
-
-with open(READ_PATH) as r_file:
-    lines = r_file.readlines()
-
-text = ''
-count = 1
-for line in lines:
-    char_count = count_chars(line)
-    p_count = count_punctuation(line)
-    text += f'Line {count}: {line.strip()} ({char_count})({p_count})\n'
-    count += 1
-
-with open(WRITE_PATH, 'w') as w_file:
-    w_file.write(text)
+with open(READ_PATH, 'r') as r_file:
+    with open(WRITE_PATH, 'w') as w_file:
+        reader = r_file.readlines()
+        for index, line in enumerate(reader):
+            char_count = count_symbols(line, string.ascii_letters)
+            p_count = count_symbols(line, string.punctuation)
+            print(f'Line {index+1}: {line.strip()} ({char_count})({p_count})',
+                  file=w_file)
