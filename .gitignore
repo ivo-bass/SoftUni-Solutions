@@ -9,6 +9,15 @@ __pycache__/
 # VSCode folder
 .vscode
 
+# Examples folder
+example_files/
+
+# unusable files
+*.txt
+*.zip
+*.pptx
+
+
 # Distribution / packaging
 .Python
 build/
