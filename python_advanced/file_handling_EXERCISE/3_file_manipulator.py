@@ -24,9 +24,9 @@ def replace_text(name, old, new):
         return
     with open(name, 'r') as r_file:
         reader = r_file.read()
-        reader = reader.replace(old, new)
+        updated = reader.replace(old, new)
     with open(name, 'w') as w_file:
-        w_file.write(reader)
+        w_file.write(updated)
 
 
 def delete_file(name):
