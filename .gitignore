@@ -16,7 +16,6 @@ __pycache__/
 example_files/
 
 # unusable files
-*.txt
 *.zip
 *.pptx
 
