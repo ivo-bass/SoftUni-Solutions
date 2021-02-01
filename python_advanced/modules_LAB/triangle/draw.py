@@ -13,6 +13,3 @@ def print_triangle(size):
         print_line(row)
     for row in range(size, 0, -1):
         print_line(row)
-
-
-print_triangle(5)
