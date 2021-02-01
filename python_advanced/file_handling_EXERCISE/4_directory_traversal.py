@@ -7,9 +7,9 @@ WIN_REPORT_PATH = f'C:\\Users\\{USERNAME}\\Desktop\\report.txt'
 LINUX_REPORT_PATH = f'/home/{USERNAME}/Desktop/report.txt'
 
 
-def traverse_path(path):
+def traverse_path(root_path):
     all_files = {}
-    path = os.walk(path)
+    path = os.walk(root_path)
 
     for _, _, files in path:
         for file in files:
