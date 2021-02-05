@@ -1,4 +1,4 @@
-from python_advanced.wotkshop_tic_tac_toe.utils import *
+from python_advanced.wotkshop_tic_tac_toe.modules.utils import *
 
 
 class Player:

@@ -1,6 +1,6 @@
 from itertools import cycle
 
-from python_advanced.wotkshop_tic_tac_toe.utils import *
+from python_advanced.wotkshop_tic_tac_toe.modules.utils import *
 
 
 def ask_for_position(board, name):

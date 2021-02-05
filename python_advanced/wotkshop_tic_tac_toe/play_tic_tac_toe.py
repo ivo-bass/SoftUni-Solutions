@@ -1,5 +1,5 @@
-from python_advanced.wotkshop_tic_tac_toe.play import play
-from python_advanced.wotkshop_tic_tac_toe.setup import setup
+from python_advanced.wotkshop_tic_tac_toe.modules.play import play
+from python_advanced.wotkshop_tic_tac_toe.modules.setup import setup
 
 
 def main():
