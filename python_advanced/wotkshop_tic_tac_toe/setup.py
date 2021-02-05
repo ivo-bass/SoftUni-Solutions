@@ -19,7 +19,7 @@ def assign_players_symbols(*pls, symbols=PLAYERS_SYMBOLS):
             pls[1].symbol = symbols[1] if pls[0].symbol == symbols[0] else symbols[0]
             break
         else:
-            print('Try again.')
+            print_invalid_symbol_msg(symbol)
 
 
 def create_board(size=BOARD_SIZE):
@@ -36,7 +36,7 @@ def create_board(size=BOARD_SIZE):
 
 
 def show_board_numbers(board):
-    print('This is the numeration of the board:')
+    print_show_board_numbers_msg()
     show_board(board)
 
 

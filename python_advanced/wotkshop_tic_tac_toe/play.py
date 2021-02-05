@@ -6,10 +6,10 @@ from python_advanced.wotkshop_tic_tac_toe.utils import *
 def ask_for_position(board, name):
     """Ask for player's choice until it is valid."""
     while True:
-        pos = input(f'{name} choose a free position [1-9]: ')
-        if is_valid_position(board, pos):
-            return pos
-        print('Invalid position.')
+        position = input(f'{name} choose a free position [1-9]: ')
+        if is_valid_position(board, position):
+            return position
+        print_invalid_position_msg(position)
 
 
 def get_coordinates(position):

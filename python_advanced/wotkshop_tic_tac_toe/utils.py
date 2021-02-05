@@ -44,3 +44,15 @@ def print_winner(name):
 def show_board(board):
     for row in board:
         print('|' + '|'.join(row) + '|')
+
+
+def print_invalid_symbol_msg(s):
+    print(f'"{s}" is invalid symbol.')
+
+
+def print_show_board_numbers_msg():
+    print('This is the numeration of the board:')
+
+
+def print_invalid_position_msg(p):
+    print(f'"{p}" is invalid position.')
