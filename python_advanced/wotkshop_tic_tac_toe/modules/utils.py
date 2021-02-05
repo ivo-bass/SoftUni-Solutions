@@ -8,6 +8,7 @@ LEGAL_MOVES = {
     '7': (2, 0), '8': (2, 1), '9': (2, 2),
 }
 DIAGONAL_CELLS = ((0, 0), (0, 2), (1, 1), (2, 0), (2, 2))
+POSITIVE_ANSWERS = ('y', 'ye', 'yes', 'д', 'да', 'ok', 'ок', 'go', 'давай', 'бой')
 
 
 # ____Validations____
@@ -56,3 +57,17 @@ def print_invalid_position_msg(p):
 
 def print_show_board_numbers_msg():
     print('This is the numeration of the board:')
+
+
+def print_result(name1, name2, wins1, wins2):
+    print()
+    print(f'{name1}: {wins1} wins')
+    print(f'{name2}: {wins2} wins')
+
+
+def print_start_msg():
+    print('\nLet\'s go!\n')
+
+
+def print_goodbye_msg():
+    print('See you soon!')

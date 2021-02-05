@@ -5,6 +5,7 @@ class Player:
     def __init__(self, name):
         self.name = name
         self.symbol = ''
+        self.wins = 0
 
 
 def create_players(turns=PLAYERS_COUNT):
@@ -49,5 +50,4 @@ def setup():
     assign_players_symbols(pl_1, pl_2)
     board = create_board()
     show_board_numbers(board)
-    board = clean_board(board)
     return pl_1, pl_2, board
