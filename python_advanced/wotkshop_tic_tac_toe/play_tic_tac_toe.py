@@ -90,6 +90,10 @@ def ask_for_position(board, name):
         print('Invalid position.')
 
 
+def get_coordinates(position):
+    return LEGAL_MOVES[position]
+
+
 def draw_position_on_board(board, x, y, symbol):
     board[x][y] = symbol
     return board
@@ -120,10 +124,6 @@ def is_full_board(board):
 
 def print_tie(name1, name2):
     print(f'{name1} and {name2} it\'s tie')
-
-
-def get_coordinates(position):
-    return LEGAL_MOVES[position]
 
 
 def play(board, pl1, pl2):
