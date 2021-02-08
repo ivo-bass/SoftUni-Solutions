@@ -1,9 +1,25 @@
 QUEEN = 'Q'
 KING = 'K'
-PLUS = '+'
-MINUS = '-'
-SAFE_KING_MSG = 'The king is safe!'
 SIZE = 8
+SAFE_KING_MSG = 'The king is safe!'
+
+
+def plus(a, b): return a + b
+
+
+def minus(a, b): return a - b
+
+
+DIRECTIONS = [
+    (None, plus),  # right
+    (None, minus),  # left
+    (plus, None),  # up
+    (minus, None),  # down
+    (plus, plus),  # down right
+    (minus, plus),  # up right
+    (plus, minus),  # down left
+    (minus, minus),  # up left
+]
 
 
 def get_input():
@@ -23,23 +39,14 @@ def is_valid(m, r, c):
 
 def search_direction(mat, x, y, x_operator=None, y_operator=None):
     for i in range(1, SIZE):
-        row = eval(f'{x} {x_operator} {i}') if x_operator else x
-        col = eval(f'{y} {y_operator} {i}') if y_operator else y
+        row = x_operator(x, i) if x_operator else x
+        col = y_operator(y, i) if y_operator else y
         if is_valid(mat, row, col):
             return [row, col]
 
 
 def search_for_queens(mat, x, y):
-    results = [
-        search_direction(mat, x, y, y_operator=PLUS),  # right
-        search_direction(mat, x, y, y_operator=MINUS),  # left
-        search_direction(mat, x, y, x_operator=PLUS),  # up
-        search_direction(mat, x, y, x_operator=MINUS),  # down
-        search_direction(mat, x, y, x_operator=PLUS, y_operator=PLUS),  # down right
-        search_direction(mat, x, y, x_operator=MINUS, y_operator=PLUS),  # up right
-        search_direction(mat, x, y, x_operator=PLUS, y_operator=MINUS),  # down left
-        search_direction(mat, x, y, x_operator=MINUS, y_operator=MINUS)  # up left
-    ]
+    results = [search_direction(mat, x, y, x_op, y_op) for (x_op, y_op) in DIRECTIONS]
     return list(filter(lambda q: q, results))
 
 
