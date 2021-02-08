@@ -1,97 +1,51 @@
 QUEEN = 'Q'
 KING = 'K'
-SAFE_MSG = 'The king is safe!'
+PLUS = '+'
+MINUS = '-'
+SAFE_KING_MSG = 'The king is safe!'
+SIZE = 8
 
 
 def get_input():
-    size = 8
-    return [input().split(' ') for _ in range(size)]
+    return [input().split(' ') for _ in range(SIZE)]
 
 
 def locate_king(mat):
-    for row_i in range(len(mat)):
-        for col_i in range(len(mat)):
+    for row_i in range(SIZE):
+        for col_i in range(SIZE):
             if mat[row_i][col_i] == KING:
                 return row_i, col_i
 
 
-def search_left(mat, x, y):
-    for c in range(y - 1, -1, -1):
-        if mat[x][c] == QUEEN:
-            return [x, c]
+def is_valid(m, r, c):
+    return 0 <= r < SIZE and 0 <= c < SIZE and m[r][c] == QUEEN
 
 
-def search_right(mat, x, y):
-    for c in range(y + 1, len(mat)):
-        if mat[x][c] == QUEEN:
-            return [x, c]
-
-
-def search_up(mat, x, y):
-    for r in range(x - 1, -1, -1):
-        if mat[r][y] == QUEEN:
-            return [r, y]
-
-
-def search_down(mat, x, y):
-    for r in range(x + 1, len(mat)):
-        if mat[r][y] == QUEEN:
-            return [r, y]
-
-
-def search_up_left(mat, x, y):
-    for r in range(x - 1, -1, -1):
-        y -= 1
-        if y < 0:
-            break
-        if mat[r][y] == QUEEN:
-            return [r, y]
-
-
-def search_up_right(mat, x, y):
-    for r in range(x - 1, -1, -1):
-        y += 1
-        if y == len(mat):
-            break
-        if mat[r][y] == QUEEN:
-            return [r, y]
-
-
-def search_down_left(mat, x, y):
-    for r in range(x + 1, len(mat)):
-        y -= 1
-        if y < 0:
-            break
-        if mat[r][y] == QUEEN:
-            return [r, y]
-
-
-def search_down_right(mat, x, y):
-    for r in range(x + 1, len(mat)):
-        y += 1
-        if y == len(mat):
-            break
-        if mat[r][y] == QUEEN:
-            return [r, y]
+def search_direction(mat, x, y, x_sign=None, y_sign=None):
+    for i in range(1, SIZE):
+        row = eval(f'{x} {x_sign} {i}') if x_sign else x
+        col = eval(f'{y} {y_sign} {i}') if y_sign else y
+        if is_valid(mat, row, col):
+            return [row, col]
 
 
 def search_for_queen(mat, x, y):
-    return [search_left(mat, x, y),
-            search_right(mat, x, y),
-            search_up(mat, x, y),
-            search_down(mat, x, y),
-            search_up_left(mat, x, y),
-            search_up_right(mat, x, y),
-            search_down_left(mat, x, y),
-            search_down_right(mat, x, y)]
+    results = [search_direction(mat, x, y, y_sign=PLUS),  # right
+               search_direction(mat, x, y, y_sign=MINUS),  # left
+               search_direction(mat, x, y, x_sign=PLUS),  # up
+               search_direction(mat, x, y, x_sign=MINUS),  # down
+               search_direction(mat, x, y, x_sign=PLUS, y_sign=PLUS),  # down right
+               search_direction(mat, x, y, x_sign=MINUS, y_sign=PLUS),  # up right
+               search_direction(mat, x, y, x_sign=PLUS, y_sign=MINUS),  # down left
+               search_direction(mat, x, y, x_sign=MINUS, y_sign=MINUS)]  # up left
+    return list(filter(lambda q: q, results))
 
 
-def print_queens(ll):
-    queens = list(filter(lambda x: x is not None, ll))
+def print_queens(queens):
     if queens:
         [print(queen) for queen in queens]
     else:
-        print(SAFE_MSG)
+        print(SAFE_KING_MSG)
 
 
 matrix = get_input()
