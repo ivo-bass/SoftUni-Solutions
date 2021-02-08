@@ -30,14 +30,16 @@ def search_direction(mat, x, y, x_operator=None, y_operator=None):
 
 
 def search_for_queens(mat, x, y):
-    results = [search_direction(mat, x, y, y_operator=PLUS),  # right
-               search_direction(mat, x, y, y_operator=MINUS),  # left
-               search_direction(mat, x, y, x_operator=PLUS),  # up
-               search_direction(mat, x, y, x_operator=MINUS),  # down
-               search_direction(mat, x, y, x_operator=PLUS, y_operator=PLUS),  # down right
-               search_direction(mat, x, y, x_operator=MINUS, y_operator=PLUS),  # up right
-               search_direction(mat, x, y, x_operator=PLUS, y_operator=MINUS),  # down left
-               search_direction(mat, x, y, x_operator=MINUS, y_operator=MINUS)]  # up left
+    results = [
+        search_direction(mat, x, y, y_operator=PLUS),  # right
+        search_direction(mat, x, y, y_operator=MINUS),  # left
+        search_direction(mat, x, y, x_operator=PLUS),  # up
+        search_direction(mat, x, y, x_operator=MINUS),  # down
+        search_direction(mat, x, y, x_operator=PLUS, y_operator=PLUS),  # down right
+        search_direction(mat, x, y, x_operator=MINUS, y_operator=PLUS),  # up right
+        search_direction(mat, x, y, x_operator=PLUS, y_operator=MINUS),  # down left
+        search_direction(mat, x, y, x_operator=MINUS, y_operator=MINUS)  # up left
+    ]
     return list(filter(lambda q: q, results))
 
 
