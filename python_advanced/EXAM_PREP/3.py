@@ -9,7 +9,7 @@ def get_magic_triangle(n, triangle=[[1], [1, 1]]):
 def generate_row(ll):
     next_row = []
     prev_row = ll[-1]
-    for i in range(len(prev_row)+1):
+    for i in range(len(prev_row) + 1):
         left_num = 0
         right_num = 0
         if i - 1 >= 0:
