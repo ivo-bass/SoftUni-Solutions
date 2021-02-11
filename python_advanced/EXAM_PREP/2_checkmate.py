@@ -3,22 +3,15 @@ KING = 'K'
 SIZE = 8
 SAFE_KING_MSG = 'The king is safe!'
 
-
-def plus(a, b): return a + b
-
-
-def minus(a, b): return a - b
-
-
-DIRECTIONS = [
-    (None, plus),  # right
-    (None, minus),  # left
-    (plus, None),  # up
-    (minus, None),  # down
-    (plus, plus),  # down right
-    (minus, plus),  # up right
-    (plus, minus),  # down left
-    (minus, minus),  # up left
+DELTAS = [
+    (0, -1),  # left
+    (-1, -1),  # up left
+    (1, 0),  # up
+    (-1, 1),  # up right
+    (0, 1),  # right
+    (1, 1),  # down right
+    (-1, 0),  # down
+    (1, -1),  # down left
 ]
 
 
@@ -33,20 +26,23 @@ def locate_king(mat):
                 return row_i, col_i
 
 
-def is_valid(m, r, c):
-    return 0 <= r < SIZE and 0 <= c < SIZE and m[r][c] == QUEEN
+def is_valid(value):
+    return 0 <= value < SIZE
 
 
-def search_direction(mat, x, y, x_operator=None, y_operator=None):
-    for i in range(1, SIZE):
-        row = x_operator(x, i) if x_operator else x
-        col = y_operator(y, i) if y_operator else y
-        if is_valid(mat, row, col):
-            return [row, col]
+def search_for_delta(mat, x, y, delta):
+    delta_x, delta_y = delta
+    while True:
+        if not is_valid(x) or not is_valid(y):
+            return None
+        if mat[x][y] == QUEEN:
+            return x, y
+        x += delta_x
+        y += delta_y
 
 
 def search_for_queens(mat, x, y):
-    results = [search_direction(mat, x, y, x_op, y_op) for (x_op, y_op) in DIRECTIONS]
+    results = [search_for_delta(mat, x, y, delta) for delta in DELTAS]
     return list(filter(lambda q: q, results))
 
 
