@@ -1,29 +1,35 @@
 """Search for element's COORDINATES until element is found from given POSITION in SQUARE matrix"""
-SEARCHED_ELEMENT = 'Q'
+QUEEN = 'Q'
+KING = 'K'
 SIZE_OF_MATRIX = 8
-PLUS = '+'
-MINUS = '-'
+
+DELTAS = [
+    (0, -1),  # left
+    (-1, -1),  # up left
+    (1, 0),  # up
+    (-1, 1),  # up right
+    (0, 1),  # right
+    (1, 1),  # down right
+    (-1, 0),  # down
+    (1, -1),  # down left
+]
 
 
-def is_valid(m, r, c):
-    return 0 <= r < SIZE_OF_MATRIX and 0 <= c < SIZE_OF_MATRIX and m[r][c] == SEARCHED_ELEMENT
+def is_valid(value, max_value):
+    return 0 <= value < max_value
 
 
-def search(mat, x, y, x_operator=None, y_operator=None):
-    for i in range(1, SIZE_OF_MATRIX):
-        row = eval(f'{x} {x_operator} {i}') if x_operator else x
-        col = eval(f'{y} {y_operator} {i}') if y_operator else y
-        if is_valid(mat, row, col):
-            return [row, col]
+def search_for_delta(mat, x, y, delta):
+    delta_x, delta_y = delta
+    while True:
+        if not is_valid(x, SIZE_OF_MATRIX) or not is_valid(y, SIZE_OF_MATRIX):
+            return None
+        if mat[x][y] == QUEEN:
+            return x, y
+        x += delta_x
+        y += delta_y
 
 
-def search_for_element_from_given_location_in_matrix(mat, x, y):
-    results = [search(mat, x, y, y_operator=PLUS),  # right
-               search(mat, x, y, y_operator=MINUS),  # left
-               search(mat, x, y, x_operator=PLUS),  # up
-               search(mat, x, y, x_operator=MINUS),  # down
-               search(mat, x, y, x_operator=PLUS, y_operator=PLUS),  # down right
-               search(mat, x, y, x_operator=MINUS, y_operator=PLUS),  # up right
-               search(mat, x, y, x_operator=PLUS, y_operator=MINUS),  # down left
-               search(mat, x, y, x_operator=MINUS, y_operator=MINUS)]  # up left
+def search_for_cell_from_given_position(mat, x, y):
+    results = [search_for_delta(mat, x, y, delta) for delta in DELTAS]
     return list(filter(lambda q: q, results))

@@ -36,7 +36,7 @@ def search_for_delta(mat, x, y, delta):
         if not is_valid(x) or not is_valid(y):
             return None
         if mat[x][y] == QUEEN:
-            return x, y
+            return [x, y]
         x += delta_x
         y += delta_y
 
@@ -46,9 +46,10 @@ def search_for_queens(mat, x, y):
     return list(filter(lambda q: q, results))
 
 
-def print_queens(queens):
+def print_result(queens):
     if queens:
-        [print(queen) for queen in queens]
+        for queen in queens:
+            print(queen)
     else:
         print(SAFE_KING_MSG)
 
@@ -56,4 +57,4 @@ def print_queens(queens):
 matrix = get_input()
 king_x, king_y = locate_king(matrix)
 killer_queens = search_for_queens(matrix, king_x, king_y)
-print_queens(killer_queens)
+print_result(killer_queens)
