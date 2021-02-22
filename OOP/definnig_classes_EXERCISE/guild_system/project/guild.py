@@ -24,7 +24,7 @@ class Guild:
         g_info = f"Guild: {self.name}\n"
         pl_info = ''
         for pl in self.players:
-            pl_info += f'{pl.player_info()}\n'
+            pl_info += f'{pl.player_info()}'
         return g_info + pl_info
 
 # george = Player("George", 50, 100)
