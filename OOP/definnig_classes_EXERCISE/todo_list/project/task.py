@@ -21,10 +21,11 @@ class Task:
         self.comments.append(comment)
 
     def edit_comment(self, comment_number: int, new_comment: str):
-        if comment_number not in range(len(self.comments)):
+        try:
+            self.comments[comment_number] = new_comment
+            return ", ".join(self.comments)
+        except IndexError:
             return "Cannot find comment."
-        self.comments[comment_number] = new_comment
-        return ", ".join(self.comments)
 
     def details(self):
         return f"Name: {self.name} - Due Date: {self.due_date}"

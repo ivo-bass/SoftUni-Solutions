@@ -13,19 +13,16 @@ class Section:
         return f"Task {new_task.details()} is added to the section"
 
     def complete_task(self, task_name):
-        for t in self.tasks:
-            if t.name == task_name:
-                t.completed = True
-                return f"Completed task {t.name}"
-        return f"Could not find task with the name {task_name}"
+        try:
+            filtered_task = [t for t in self.tasks if t.name == task_name][0]
+            filtered_task.completed = True
+            return f"Completed task {filtered_task.name}"
+        except IndexError:
+            return f"Could not find task with the name {task_name}"
 
     def clean_section(self):
-        count = len(self.tasks)
-        uncompleted = []
-        for t in self.tasks:
-            if not t.completed:
-                uncompleted.append(t)
-                count -= 1
+        uncompleted = [t for t in self.tasks if not t.completed]
+        count = len(self.tasks) - len(uncompleted)
         self.tasks = uncompleted
         return f"Cleared {count} tasks."
 
@@ -43,6 +40,7 @@ class Section:
 # print(task.details())
 # section = Section("Daily tasks")
 # print(section.add_task(task))
+# print(section.complete_task("Go to University"))
 # second_task = Task("Make bed", "27/05/2020")
 # section.add_task(second_task)
 # print(section.clean_section())

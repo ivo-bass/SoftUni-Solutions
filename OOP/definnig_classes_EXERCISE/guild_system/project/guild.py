@@ -13,12 +13,13 @@ class Guild:
         return f"Player {p.name} is in another guild."
 
     def kick_player(self, player_name):
-        for p in self.players:
-            if p.name == player_name:
-                p.guild = 'Unaffiliated'
-                self.players.remove(p)
-                return f"Player {player_name} has been removed from the guild."
-        return f"Player {player_name} is not in the guild."
+        try:
+            filtered_player = [p for p in self.players if p.name == player_name][0]
+            filtered_player.guild = 'Unaffiliated'
+            self.players.remove(filtered_player)
+            return f"Player {player_name} has been removed from the guild."
+        except IndexError:
+            return f"Player {player_name} is not in the guild."
 
     def guild_info(self):
         g_info = f"Guild: {self.name}\n"

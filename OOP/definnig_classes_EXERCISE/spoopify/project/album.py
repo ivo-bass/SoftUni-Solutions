@@ -21,11 +21,12 @@ class Album:
     def remove_song(self, song_name):
         if self.published:
             return "Cannot remove songs. Album is published."
-        for s in self.songs:
-            if s.name == song_name:
-                self.songs.remove(s)
-                return f"Removed song {song_name} from album {self.name}."
-        return "Song is not in the album."
+        try:
+            filtered_song = [s for s in self.songs if s.name == song_name][0]
+            self.songs.remove(filtered_song)
+            return f"Removed song {song_name} from album {self.name}."
+        except IndexError:
+            return "Song is not in the album."
 
     def publish(self):
         if self.published:

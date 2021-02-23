@@ -13,15 +13,13 @@ class Player:
         return f"Skill {skill_name} added to the collection of the player {self.name}"
 
     def player_info(self):
-        pl_info = f'Name: {self.name}\n' \
-                  f'Guild: {self.guild}\n' \
-                  f'HP: {self.hp}\n' \
-                  f'MP: {self.mp}\n'
-
-        sk_info = ''
+        info = f'Name: {self.name}\n' \
+               f'Guild: {self.guild}\n' \
+               f'HP: {self.hp}\n' \
+               f'MP: {self.mp}\n'
         for sk_name, sk_cost in self.skills.items():
-            sk_info += f'==={sk_name} - {sk_cost}\n'
-        return pl_info + sk_info
+            info += f'==={sk_name} - {sk_cost}\n'
+        return info
 
 # player = Player('ivo', 50, 50)
 # player.add_skill('mana', 10)

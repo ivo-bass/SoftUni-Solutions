@@ -10,17 +10,16 @@ class Trainer:
         return f"Caught {pokemon.pokemon_details()}"
 
     def release_pokemon(self, pokemon_name: str):
-        for p in self.pokemon:
-            if p.name == pokemon_name:
-                self.pokemon.remove(p)
-                return f"You have released {pokemon_name}"
-        return "Pokemon is not caught"
+        try:
+            filtered_pokemon = [p for p in self.pokemon if p.name == pokemon_name][0]
+            self.pokemon.remove(filtered_pokemon)
+            return f"You have released {pokemon_name}"
+        except IndexError:
+            return "Pokemon is not caught"
 
     def trainer_data(self):
         t_data = f"Pokemon Trainer {self.name}\n" \
                  f"Pokemon count {len(self.pokemon)}\n"
-
-        p_data = ""
         for p in self.pokemon:
-            p_data += f"- {p.pokemon_details()}\n"
-        return t_data + p_data
+            t_data += f"- {p.pokemon_details()}\n"
+        return t_data
