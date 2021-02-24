@@ -1,7 +1,12 @@
-# from OOP.definnig_classes_EXERCISE.todo_list.project.task import Task
+#!/usr/bin/python3
+
+# from OOP.defining_classes_EXERCISE.todo_list.project.task import Task
 
 
 class Section:
+    """
+    """
+
     def __init__(self, name: str):
         self.name = name
         self.tasks = []

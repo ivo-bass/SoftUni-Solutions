@@ -1,5 +1,5 @@
-# from OOP.definnig_classes_EXERCISE.spoopify.band import Band
-# from OOP.definnig_classes_EXERCISE.spoopify.song import Song
+# from OOP.defining_classes_EXERCISE.spoopify.band import Band
+# from OOP.defining_classes_EXERCISE.spoopify.song import Song
 
 
 class Album:
