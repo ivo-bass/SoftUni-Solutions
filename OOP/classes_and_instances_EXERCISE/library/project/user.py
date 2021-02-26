@@ -2,7 +2,7 @@ class User:
     def __init__(self, user_id: int, username: str):
         self.user_id = user_id
         self.username = username
-        self.books = []  # might be class attribute not instance
+        self.books = []  # in the problem description is described as class attr not instance attr
 
     @staticmethod
     def check_if_book_is_rented(self, book_name, library):
