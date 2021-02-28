@@ -1,7 +1,7 @@
-# from OOP.exam_prep.prep_1.project.card.card import Card
+from OOP.exam_prep.prep_1.project.card.card import Card
 
 
-from .card import Card
+# from .card import Card
 
 
 class MagicCard(Card):

@@ -1,9 +1,6 @@
 from abc import ABC
 
-from ..card.card_repository import CardRepository
-
-
-# from OOP.exam_prep.prep_1.project.card.card_repository import CardRepository
+from OOP.exam_prep.prep_1.project.card.card_repository import CardRepository
 
 
 class Player(ABC):

@@ -1,19 +1,17 @@
-# from OOP.exam_prep.prep_1.project.battle_field import BattleField
-# from OOP.exam_prep.prep_1.project.card.card_repository import CardRepository
-# from OOP.exam_prep.prep_1.project.card.magic_card import MagicCard
-# from OOP.exam_prep.prep_1.project.card.trap_card import TrapCard
-# from OOP.exam_prep.prep_1.project.player.advanced import Advanced
-# from OOP.exam_prep.prep_1.project.player.beginner import Beginner
-# from OOP.exam_prep.prep_1.project.player.player_repository import PlayerRepository
-
-
-from .battle_field import BattleField
-from .card.card_repository import CardRepository
-from .card.magic_card import MagicCard
-from .card.trap_card import TrapCard
-from .player.advanced import Advanced
-from .player.beginner import Beginner
-from .player.player_repository import PlayerRepository
+# from .battle_field import BattleField
+# from .card.card_repository import CardRepository
+# from .card.magic_card import MagicCard
+# from .card.trap_card import TrapCard
+# from .player.advanced import Advanced
+# from .player.beginner import Beginner
+# from .player.player_repository import PlayerRepository
+from OOP.exam_prep.prep_1.project.battle_field import BattleField
+from OOP.exam_prep.prep_1.project.card.card_repository import CardRepository
+from OOP.exam_prep.prep_1.project.card.magic_card import MagicCard
+from OOP.exam_prep.prep_1.project.card.trap_card import TrapCard
+from OOP.exam_prep.prep_1.project.player.advanced import Advanced
+from OOP.exam_prep.prep_1.project.player.beginner import Beginner
+from OOP.exam_prep.prep_1.project.player.player_repository import PlayerRepository
 
 
 class Controller:
@@ -65,13 +63,12 @@ class Controller:
             info += f"Username: {player.username} - Health: {player.health} - Cards {player.card_repository.Count}\n" + cards_info
         return info
 
-
-c = Controller()
-print(c.add_card('Magic', 'Spell'))
-print(c.add_player('Beginner', 'Ivo'))
-print(c.add_player('Beginner', 'Vesi'))
-c.add_player_card('Ivo', 'Spell')
-c.add_player_card('Vesi', 'Spell')
-print(c.fight('Ivo', 'Vesi'))
-print(c.report())
-a = 5
+# c = Controller()
+# print(c.add_card('Magic', 'Spell'))
+# print(c.add_player('Beginner', 'Ivo'))
+# print(c.add_player('Beginner', 'Vesi'))
+# c.add_player_card('Ivo', 'Spell')
+# c.add_player_card('Vesi', 'Spell')
+# print(c.fight('Ivo', 'Vesi'))
+# print(c.report())
+# a = 5

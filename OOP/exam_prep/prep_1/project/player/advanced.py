@@ -1,7 +1,7 @@
-# from OOP.exam_prep.prep_1.project.player.player import Player
+from OOP.exam_prep.prep_1.project.player.player import Player
 
 
-from .player import Player
+# from .player import Player
 
 
 class Advanced(Player):

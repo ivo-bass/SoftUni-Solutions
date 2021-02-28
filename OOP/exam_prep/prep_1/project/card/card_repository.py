@@ -1,9 +1,12 @@
+from OOP.exam_prep.prep_1.project.card.card import Card
+
+
 class CardRepository:
     def __init__(self):
         self.Count = 0
         self.Cards = []
 
-    def add(self, card):
+    def add(self, card: Card):
         for c in self.Cards:
             if c.name == card.name:
                 raise ValueError(f"Card {c.name} already exists!")
