@@ -1,10 +1,10 @@
 import unittest
 
-from OOP.exam_prep.prep_1.project.card.card_repository import CardRepository
-from OOP.exam_prep.prep_1.project.card.trap_card import TrapCard
-from OOP.exam_prep.prep_1.project.controller import Controller
-from OOP.exam_prep.prep_1.project.player.beginner import Beginner
-from OOP.exam_prep.prep_1.project.player.player_repository import PlayerRepository
+from project.card.card_repository import CardRepository
+from project.card.trap_card import TrapCard
+from project.controller import Controller
+from project.player.beginner import Beginner
+from project.player.player_repository import PlayerRepository
 
 
 class ControllerTest(unittest.TestCase):
@@ -47,14 +47,14 @@ class ControllerTest(unittest.TestCase):
     def test_add_card_type(self):
         c = Controller()
         c.add_card('Trap', 'a')
-        act = type(c.card_repository.Cards[0])
+        act = type(c.card_repository.cards[0])
         exp = TrapCard
         self.assertEqual(exp, act)
 
     def test_add_card_name(self):
         c = Controller()
         c.add_card('Trap', 'a')
-        act = c.card_repository.Cards[0].name
+        act = c.card_repository.cards[0].name
         exp = 'a'
         self.assertEqual(exp, act)
 
@@ -71,7 +71,7 @@ class ControllerTest(unittest.TestCase):
         c.add_player('Beginner', 'beginner')
         c.add_card('Trap', 'trap')
         c.add_player_card('beginner', 'trap')
-        act = c.player_repository.players[0].card_repository.Cards[0].name
+        act = c.player_repository.players[0].card_repository.cards[0].name
         exp = 'trap'
         self.assertEqual(exp, act)
 
@@ -84,7 +84,7 @@ class ControllerTest(unittest.TestCase):
         c.add_card('Magic', 'm')
         c.add_player_card('b', 'm')
         act = c.fight('a', 'b')
-        exp = "Attack user health 220 - Enemy user health 50"
+        exp = "Attack user health 220 - Enemy user health 130"
         self.assertEqual(exp, act)
 
     def test_report(self):
@@ -99,6 +99,6 @@ class ControllerTest(unittest.TestCase):
         act = c.report()
         exp = "Username: a - Health: 220 - Cards 1\n" \
               "### Card: t - Damage: 120\n" \
-              "Username: b - Health: 50 - Cards 1\n" \
+              "Username: b - Health: 130 - Cards 1\n" \
               "### Card: m - Damage: 35\n"
         self.assertEqual(exp, act)

@@ -1,28 +1,20 @@
-from OOP.exam_prep.prep_1.project.card.card import Card
-
-
 class CardRepository:
     def __init__(self):
-        self.Count = 0
-        self.Cards = []
+        self.count = 0
+        self.cards = list()
 
-    def add(self, card: Card):
-        for c in self.Cards:
-            if c.name == card.name:
-                raise ValueError(f"Card {c.name} already exists!")
-        self.Cards.append(card)
-        self.Count += 1
+    def add(self, card):
+        if any(c.name == card.name for c in self.cards):
+            raise ValueError(f"Card {c.name} already exists!")
+        self.cards.append(card)
+        self.count += 1
 
     def remove(self, card: str):
         if not card:
             raise ValueError("Player cannot be an empty string!")
-        for i, c in enumerate(self.Cards):
-            if c.name == card:
-                self.Count -= 1
-                self.Cards.pop(i)
-                return
+        card_found = list(filter(lambda x: x.name == card, self.cards))[0]
+        self.cards.remove(card_found)
+        self.count -= 1
 
     def find(self, name: str):
-        for c in self.Cards:
-            if c.name == name:
-                return c
+        return list(filter(lambda x: x.name == name, self.cards))[0]

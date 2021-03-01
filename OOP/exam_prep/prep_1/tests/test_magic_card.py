@@ -1,6 +1,6 @@
 import unittest
 
-from OOP.exam_prep.prep_1.project.card.magic_card import MagicCard
+from project.card.magic_card import MagicCard
 
 
 class MagicCardTest(unittest.TestCase):
@@ -8,19 +8,19 @@ class MagicCardTest(unittest.TestCase):
         card = MagicCard('a')
         act = card.name
         exp = 'a'
-        self.assertEqual(act, exp)
+        self.assertEqual(exp, act)
 
     def test_init_dmg_points_5(self):
         card = MagicCard('a')
         act = card.damage_points
         exp = 5
-        self.assertEqual(act, exp)
+        self.assertEqual(exp, act)
 
     def test_init_health_points_80(self):
         card = MagicCard('a')
         act = card.health_points
         exp = 80
-        self.assertEqual(act, exp)
+        self.assertEqual(exp, act)
 
     def test_init_with_empty_name(self):
         try:
@@ -30,12 +30,12 @@ class MagicCardTest(unittest.TestCase):
 
     def test_init_with_negative_dmg_points(self):
         try:
-            card = MagicCard(name='a', damage_points=-1)
+            card = MagicCard(name='a')
         except:
             self.assertRaises(ValueError)
 
     def test_init_with_negative_HP(self):
         try:
-            card = MagicCard(name='a', damage_points=5, health_points=-1)
+            card = MagicCard(name='a')
         except:
             self.assertRaises(ValueError)

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-# from OOP.defining_classes_EXERCISE.todo_list.project.task import Task
+# from OOP.defining_classes_EXERCISE.todo_list.project_new.task import Task
 
 
 class Section:
