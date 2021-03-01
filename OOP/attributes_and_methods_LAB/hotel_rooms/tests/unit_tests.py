@@ -1,7 +1,10 @@
-from project.hotel import Hotel
-from project.room import Room
+# from project.hotel import Hotel
+# from project.room import Room
 import unittest
 from unittest import mock
+
+from OOP.attributes_and_methods_LAB.hotel_rooms.project.hotel import Hotel
+from OOP.attributes_and_methods_LAB.hotel_rooms.project.room import Room
 
 
 class Tests(unittest.TestCase):
