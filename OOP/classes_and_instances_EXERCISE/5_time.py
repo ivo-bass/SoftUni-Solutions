@@ -1,3 +1,6 @@
+from datetime import datetime, timedelta
+
+
 class Time:
     max_hours = 23
     max_minutes = 59
@@ -7,6 +10,7 @@ class Time:
         self.hours = hours
         self.minutes = minutes
         self.seconds = seconds
+        self.time_obj = datetime(100, 1, 1, hour=hours, minute=minutes, second=seconds)
 
     def set_time(self, hours, minutes, seconds):
         self.hours = hours
@@ -17,22 +21,11 @@ class Time:
         return f"{self.hours:02d}:{self.minutes:02d}:{self.seconds:02d}"
 
     def next_second(self):
-        new_h = self.hours
-        new_m = self.minutes
-        if not self.seconds + 1 > Time.max_seconds:
-            new_s = self.seconds + 1
-        else:
-            new_s = 0
-            if not self.minutes + 1 > Time.max_minutes:
-                new_m = self.minutes + 1
-            else:
-                new_m = 0
-                if not self.hours + 1 > Time.max_hours:
-                    new_h = self.hours + 1
-                else:
-                    new_h = 0
-        self.set_time(new_h, new_m, new_s)
+        self.time_obj = self.time_obj + timedelta(seconds=1)
+        self.hours = self.time_obj.hour
+        self.minutes = self.time_obj.minute
+        self.seconds = self.time_obj.second
         return self.get_time()
 
-# time = Time(23, 59, 59)
+# time = Time(10, 29, 59)
 # print(time.next_second())

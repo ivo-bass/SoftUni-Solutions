@@ -16,13 +16,12 @@ class PizzaDelivery:
     def remove_ingredient(self, ingredient: str, quantity: int, ingredient_price: float):
         if self.ordered:
             return f"Pizza {self.name} already prepared and we can't make any changes!"
-        try:
-            if self.ingredients[ingredient] < quantity:
-                return f"Please check again the desired quantity of {ingredient}!"
-            self.ingredients[ingredient] -= quantity
-            self.price -= ingredient_price * quantity
-        except KeyError:
+        if ingredient not in self.ingredients:
             return f"Wrong ingredient selected! We do not use {ingredient} in {self.name}!"
+        if self.ingredients[ingredient] < quantity:
+            return f"Please check again the desired quantity of {ingredient}!"
+        self.ingredients[ingredient] -= quantity
+        self.price -= ingredient_price * quantity
 
     def make_order(self):
         self.ordered = True
