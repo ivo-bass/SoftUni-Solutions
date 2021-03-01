@@ -3,28 +3,39 @@ class Store:
         self.name = name
         self.type = type
         self.capacity = capacity
+        self.items_count = 0
         self.items = {}  # {name: quantity}
+
+    def __repr__(self):
+        return f"{self.name} of type {self.type} with capacity {self.capacity}"
+
+    @staticmethod
+    def can_add_item(count: int, capacity: int):
+        return count < capacity
+
+    @staticmethod
+    def can_remove_item(name: str, items: dict, amount: int):
+        return name in items and amount <= items[name]
 
     @classmethod
     def from_size(cls, name: str, type: str, size: int):
         return Store(name, type, size // 2)
 
     def add_item(self, item_name: str):
-        # TODO: If the addition is not possible, the following message
-        #  should be returned "Not enough capacity in the store"
+        if not self.can_add_item(self.items_count, self.capacity):
+            return "Not enough capacity in the store"
         if item_name not in self.items:
             self.items[item_name] = 0
         self.items[item_name] += 1
+        self.items_count += 1
         return f"{item_name} added to the store"
 
     def remove_item(self, item_name: str, amount: int):
-        if item_name not in self.items or self.items[item_name] < amount:
+        if not self.can_remove_item(item_name, self.items, amount):
             return f"Cannot remove {amount} {item_name}"
         self.items[item_name] -= amount
+        self.items_count -= amount
         return f"{amount} {item_name} removed from the store"
-
-    def __repr__(self):
-        return f"{self.name} of type {self.type} with capacity {self.capacity}"
 
 
 import unittest

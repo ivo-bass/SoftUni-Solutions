@@ -6,7 +6,7 @@ class Integer:
     def from_float(cls, value):
         if type(value) is not float:
             return "value is not a float"
-        return Integer(int(value))
+        return cls(int(value))
 
     @classmethod
     def from_roman(cls, value):
@@ -17,13 +17,13 @@ class Integer:
                 result += roman_numerals[c]
             else:
                 result -= roman_numerals[c]
-        return Integer(result)
+        return cls(result)
 
     @classmethod
     def from_string(cls, value):
         if type(value) is not str:
             return 'wrong type'
-        return Integer(int(value))
+        return cls(int(value))
 
     def add(self, integer):
         if type(integer) is not Integer:
