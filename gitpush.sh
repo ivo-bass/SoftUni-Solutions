@@ -9,4 +9,3 @@ git push
 
 read
 
-git status
