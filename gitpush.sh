@@ -7,5 +7,3 @@ git commit -m "$commitMessage"
 
 git push
 
-read
-
