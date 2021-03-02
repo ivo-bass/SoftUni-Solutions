@@ -16,13 +16,15 @@ class Hotel:
 
     def take_room(self, room_number: int, people: int):
         found_room = list(filter(lambda x: x.number == room_number, self.rooms))[0]
-        if Room.take_room(found_room, people) is None:
+        take_room_msg = found_room.take_room(people)
+        if not take_room_msg:
             self.guests += people
 
     def free_room(self, room_number: int):
         found_room = list(filter(lambda x: x.number == room_number, self.rooms))[0]
         people = found_room.guests
-        if Room.free_room(found_room) is None:
+        free_room_msg = found_room.free_room()
+        if not free_room_msg:
             self.guests -= people
 
     def print_status(self):

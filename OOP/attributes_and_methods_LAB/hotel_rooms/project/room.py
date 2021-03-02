@@ -5,8 +5,11 @@ class Room:
         self.guests = 0
         self.is_taken = False
 
+    def can_take_room(self, people):
+        return not self.is_taken and self.capacity >= people
+
     def take_room(self, people: int):
-        if self.is_taken or self.capacity < people:
+        if not self.can_take_room(people):
             return f"Room number {self.number} cannot be taken"
         self.guests = people
         self.is_taken = True
