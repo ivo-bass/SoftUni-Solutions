@@ -1,12 +1,12 @@
-from project.category import Category
-from project.document import Document
-from project.storage import Storage
-from project.topic import Topic
+# from project.category import Category
+# from project.document import Document
+# from project.storage import Storage
+# from project.topic import Topic
 
-# from OOP.attributes_and_methods_EXERCISE.document_management.project.category import Category
-# from OOP.attributes_and_methods_EXERCISE.document_management.project.document import Document
-# from OOP.attributes_and_methods_EXERCISE.document_management.project.storage import Storage
-# from OOP.attributes_and_methods_EXERCISE.document_management.project.topic import Topic
+from OOP.attributes_and_methods_EXERCISE.document_management.project.category import Category
+from OOP.attributes_and_methods_EXERCISE.document_management.project.document import Document
+from OOP.attributes_and_methods_EXERCISE.document_management.project.storage import Storage
+from OOP.attributes_and_methods_EXERCISE.document_management.project.topic import Topic
 
 c1 = Category(1, "work")
 t1 = Topic(1, "daily tasks", "C:\\work_documents")
