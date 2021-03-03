@@ -12,9 +12,9 @@ class Customer:
 
     @classmethod
     def set_id(cls):
-        cls.__id += 1
+        cls.__id = cls.get_next_id()
         return cls.__id
 
-    @classmethod
-    def get_next_id(cls):
-        return cls.__id + 1
+    @staticmethod  # should be class method but that's how it is described in problem description
+    def get_next_id():
+        return Customer.__id + 1

@@ -12,12 +12,12 @@ class ExercisePlan:
 
     @classmethod
     def set_id(cls):
-        cls.__id += 1
+        cls.__id = cls.get_next_id()
         return cls.__id
 
-    @classmethod
-    def get_next_id(cls):
-        return cls.__id + 1
+    @staticmethod
+    def get_next_id():
+        return ExercisePlan.__id + 1
 
     @classmethod
     def from_hours(cls, trainer_id: int, equipment_id: int, hours: int):

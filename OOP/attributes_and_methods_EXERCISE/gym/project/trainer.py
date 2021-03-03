@@ -10,9 +10,8 @@ class Trainer:
 
     @classmethod
     def set_id(cls):
-        cls.__id += 1
-        return cls.__id
+        cls.__id = cls.get_next_id()
 
-    @classmethod
-    def get_next_id(cls):
-        return cls.__id + 1
+    @staticmethod
+    def get_next_id():
+        return Trainer.__id + 1
