@@ -43,5 +43,4 @@ class Gym:
         trainer = self.find_object(sub.trainer_id, self.trainers, 'id')
         plan = self.find_object(trainer.id, self.plans, 'trainer_id')
         equipment = self.find_object(plan.equipment_id, self.equipment, 'id')
-        info = (sub, customer, trainer, equipment, plan)
-        return '\n'.join(map(str, info))
+        return '\n'.join(map(str, (sub, customer, trainer, equipment, plan)))
