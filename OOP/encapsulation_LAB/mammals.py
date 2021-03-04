@@ -1,5 +1,5 @@
 class Mammal:
-    __kingdom = 'animals'
+    __KINGDOM = 'animals'
 
     def __init__(self, name: str, type: str, sound: str):
         self.name = name
@@ -10,7 +10,7 @@ class Mammal:
         return f"{self.name} makes {self.sound}"
 
     def get_kingdom(self):
-        return Mammal.__kingdom
+        return self.__KINGDOM
 
     def info(self):
         return f"{self.name} is of type {self.type}"

@@ -2,6 +2,8 @@ import re
 
 
 class EmailValidator:
+    __SPLIT_REGEX = r"[@.]"
+
     def __init__(self, min_length: int, mails: list, domains: list):
         self.min_length = min_length
         self.mails = mails
@@ -17,14 +19,10 @@ class EmailValidator:
         return domain in self.domains
 
     def validate(self, email):
-        regex = r"(\S+)@(\S+)\.(\S+)"
-        match = re.match(regex, email)
-        name, mail, domain = match.group(1), match.group(2), match.group(3)
-        return all([
-            self.__validate_mail(mail),
-            self.__validate_name(name),
-            self.__validate_domain(domain)
-        ])
+        name, mail, domain = re.split(self.__SPLIT_REGEX, email)
+        return self.__validate_mail(mail) \
+               and self.__validate_name(name) \
+               and self.__validate_domain(domain)
 
 #
 # mails = ["gmail", "softuni"]
