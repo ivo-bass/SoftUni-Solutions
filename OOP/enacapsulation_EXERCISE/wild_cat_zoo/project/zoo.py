@@ -58,9 +58,9 @@ class Zoo:
         self.__budget += amount
 
     def animals_status(self):
-        lions = list(filter(lambda x: x.type == 'Lion', self.animals))
-        tigers = list(filter(lambda x: x.type == 'Tiger', self.animals))
-        cheetahs = list(filter(lambda x: x.type == 'Cheetah', self.animals))
+        lions = list(filter(lambda x: x.__class__.__name__ == 'Lion', self.animals))
+        tigers = list(filter(lambda x: x.__class__.__name__ == 'Tiger', self.animals))
+        cheetahs = list(filter(lambda x: x.__class__.__name__ == 'Cheetah', self.animals))
         info = f"You have {len(self.animals)} animals\n"
         info += f"----- {len(lions)} Lions:\n"
         for l in lions:
@@ -74,9 +74,9 @@ class Zoo:
         return info.rstrip('\n')
 
     def workers_status(self):
-        keepers = [x for x in self.workers if x.position == 'Keeper']
-        caretakers = [x for x in self.workers if x.position == 'Caretaker']
-        vets = [x for x in self.workers if x.position == 'Vet']
+        keepers = list(filter(lambda x: x.__class__.__name__ == 'Keeper', self.workers))
+        caretakers = list(filter(lambda x: x.__class__.__name__ == 'Caretaker', self.workers))
+        vets = list(filter(lambda x: x.__class__.__name__ == 'Vet', self.workers))
         info = f"You have {len(self.workers)} workers\n"
         info += f"----- {len(keepers)} Keepers:\n"
         for k in keepers:
@@ -89,17 +89,17 @@ class Zoo:
             info += str(v) + '\n'
         return info.rstrip('\n')
 
-
 # zoo = Zoo("Zootopia", 3000, 5, 8)
 #
-# # Animals creation
-# animals = [Cheetah("Cheeto", "Male", 2), Cheetah("Cheetia", "Female", 1), Lion("Simba", "Male", 4), Tiger("Zuba", "Male", 3), Tiger("Tigeria", "Female", 1), Lion("Nala", "Female", 4)]
+# # Animals creation animals = [Cheetah("Cheeto", "Male", 2), Cheetah("Cheetia", "Female", 1), Lion("Simba", "Male",
+# 4), Tiger("Zuba", "Male", 3), Tiger("Tigeria", "Female", 1), Lion("Nala", "Female", 4)]
 #
 # # Animal prices
 # prices = [200, 190, 204, 156, 211, 140]
 #
-# # Workers creation
-# workers = [Keeper("John", 26, 100), Keeper("Adam", 29, 80), Keeper("Anna", 31, 95), Caretaker("Bill", 21, 68), Caretaker("Marie", 32, 105), Caretaker("Stacy", 35, 140), Vet("Peter", 40, 300), Vet("Kasey", 37, 280), Vet("Sam", 29, 220)]
+# # Workers creation workers = [Keeper("John", 26, 100), Keeper("Adam", 29, 80), Keeper("Anna", 31, 95),
+# Caretaker("Bill", 21, 68), Caretaker("Marie", 32, 105), Caretaker("Stacy", 35, 140), Vet("Peter", 40, 300),
+# Vet("Kasey", 37, 280), Vet("Sam", 29, 220)]
 #
 # # Adding all animals
 # for i in range(len(animals)):
