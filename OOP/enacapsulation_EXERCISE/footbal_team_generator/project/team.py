@@ -38,10 +38,9 @@ class Team:
         return f"Player {player.name} joined team {self.name}"
 
     def remove_player(self, player_name: str):
-        found_player = None
-        if self.players:
+        try:
             found_player = list(filter(lambda x: x.name == player_name, self.players))[0]
-        if not found_player:
+            self.players.remove(found_player)
+            return found_player
+        except IndexError:
             return f"Player {player_name} not found"
-        self.players.remove(found_player)
-        return found_player
