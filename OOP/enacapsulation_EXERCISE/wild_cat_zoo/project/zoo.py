@@ -22,23 +22,21 @@ class Zoo:
             return "Not enough budget"
         self.animals.append(animal)
         self.__budget -= price
-        return f"{animal.name} the {animal.type} added to the zoo"
+        return f"{animal.name} the {animal.__class__.__name__} added to the zoo"
 
     def hire_worker(self, worker):
         if len(self.workers) == self.__workers_capacity:
             return "Not enough space for worker"
         self.workers.append(worker)
-        return f"{worker.name} the {worker.position} hired successfully"
+        return f"{worker.name} the {worker.__class__.__name__} hired successfully"
 
     def fire_worker(self, worker_name: str):
-        worker = None
-        workers_found = list(filter(lambda x: x.name == worker_name, self.workers))
-        if workers_found:
-            worker = workers_found[0]
-        if not worker:
+        try:
+            worker = list(filter(lambda x: x.name == worker_name, self.workers))[0]
+            self.workers.remove(worker)
+            return f"{worker_name} fired successfully"
+        except IndexError:
             return f"There is no {worker_name} in the zoo"
-        self.workers.remove(worker)
-        return f"{worker_name} fired successfully"
 
     def pay_workers(self):
         salaries = sum([x.salary for x in self.workers])
