@@ -1,5 +1,4 @@
 from project.beverage.beverage import Beverage
-from project.food.cake import Cake
 from project.food.soup import Soup
 from project.product import Product
 
@@ -19,6 +18,3 @@ print(soup.__class__.__bases__[0].__name__)
 print(soup.name)
 print(soup.price)
 print(soup.grams)
-
-cake = Cake('tort', 25, 60, 100)
-print(cake.calories)
