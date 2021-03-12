@@ -3,7 +3,8 @@ from project.food import Food, Vegetable, Fruit, Meat
 
 
 class Mouse(Mammal):
-    def make_sound(self):
+    @staticmethod
+    def make_sound():
         return "Squeak"
 
     def feed(self, food: Food):
@@ -13,7 +14,8 @@ class Mouse(Mammal):
 
 
 class Dog(Mammal):
-    def make_sound(self):
+    @staticmethod
+    def make_sound():
         return "Woof!"
 
     def feed(self, food: Food):
@@ -23,7 +25,8 @@ class Dog(Mammal):
 
 
 class Cat(Mammal):
-    def make_sound(self):
+    @staticmethod
+    def make_sound():
         return "Meow"
 
     def feed(self, food: Food):
@@ -33,7 +36,8 @@ class Cat(Mammal):
 
 
 class Tiger(Mammal):
-    def make_sound(self):
+    @staticmethod
+    def make_sound():
         return "ROAR!!!"
 
     def feed(self, food: Food):

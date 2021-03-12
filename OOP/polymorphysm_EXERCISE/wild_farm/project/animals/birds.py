@@ -3,7 +3,8 @@ from project.food import Food, Meat
 
 
 class Owl(Bird):
-    def make_sound(self):
+    @staticmethod
+    def make_sound():
         return "Hoot Hoot"
 
     def feed(self, food: Food):
@@ -13,7 +14,8 @@ class Owl(Bird):
 
 
 class Hen(Bird):
-    def make_sound(self):
+    @staticmethod
+    def make_sound():
         return "Cluck"
 
     def feed(self, food: Food):
