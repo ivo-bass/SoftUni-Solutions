@@ -4,9 +4,13 @@ from abc import ABC, abstractmethod
 class Vehicle(ABC):
     AC_CONSUMPTION = 0
 
-    @abstractmethod
+    def __init__(self, fuel_quantity, fuel_consumption):
+        self.fuel_quantity = fuel_quantity
+        self.fuel_consumption = fuel_consumption
+
     def drive(self, distance):
-        pass
+        if self.fuel_quantity >= (self.fuel_consumption + self.AC_CONSUMPTION) * distance:
+            self.fuel_quantity -= (self.fuel_consumption + self.AC_CONSUMPTION) * distance
 
     @abstractmethod
     def refuel(self, fuel):
@@ -16,28 +20,12 @@ class Vehicle(ABC):
 class Car(Vehicle):
     AC_CONSUMPTION = 0.9
 
-    def __init__(self, fuel_quantity, fuel_consumption):
-        self.fuel_quantity = fuel_quantity
-        self.fuel_consumption = fuel_consumption
-
-    def drive(self, distance):
-        if self.fuel_quantity >= (self.fuel_consumption + self.AC_CONSUMPTION) * distance:
-            self.fuel_quantity -= (self.fuel_consumption + self.AC_CONSUMPTION) * distance
-
     def refuel(self, fuel):
         self.fuel_quantity += fuel
 
 
 class Truck(Vehicle):
     AC_CONSUMPTION = 1.6
-
-    def __init__(self, fuel_quantity, fuel_consumption):
-        self.fuel_quantity = fuel_quantity
-        self.fuel_consumption = fuel_consumption
-
-    def drive(self, distance):
-        if self.fuel_quantity >= (self.fuel_consumption + self.AC_CONSUMPTION) * distance:
-            self.fuel_quantity -= (self.fuel_consumption + self.AC_CONSUMPTION) * distance
 
     def refuel(self, fuel):
         self.fuel_quantity += 0.95 * fuel
