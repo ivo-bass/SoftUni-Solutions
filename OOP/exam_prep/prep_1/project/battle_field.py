@@ -1,44 +1,41 @@
-# from OOP.exam_prep.prep_1.project.player.beginner import Beginner
-
-
-from .player.beginner import Beginner
+from project.player.player import Player
 
 
 class BattleField:
+    def fight(self, attacker: Player, enemy: Player):
+        self.validate_players_alive(attacker, enemy)
+        self.check_for_beginners(attacker, enemy)
+        self.get_bonus(attacker, enemy)
+        self.attack(attacker, enemy)
+        self.attack(enemy, attacker)
 
     @staticmethod
-    def check_for_dead(pl):
-        if pl.is_dead:
-            raise ValueError("Player is dead!")
+    def validate_players_alive(*players):
+        for player in players:
+            if player.is_dead:
+                raise ValueError("Player is dead!")
+
+    def check_for_beginners(self, *players):
+        for player in players:
+            if player.__class__.__name__ == 'Beginner':
+                self.increase_health(player)
+                self.increase_cards_damage(player)
 
     @staticmethod
-    def check_for_beginner(pl):
-        if type(pl) is Beginner:
-            pl.health += 40
-            for card in pl.card_repository.cards:
-                card.damage_points += 30
-                pl.health += card.health_points  # this is not in the description
+    def increase_health(player):
+        player.health += 40
 
     @staticmethod
-    def get_bonus_hp(pl):
-        for card in pl.card_repository.cards:
-            pl.health += card.health_points
+    def increase_cards_damage(player):
+        for card in player.card_repository:
+            card.damage_points += 30
 
-    def prepare_for_fight(self, attacker, enemy):
-        self.check_for_dead(attacker)
-        self.check_for_dead(enemy)
-        self.check_for_beginner(attacker)
-        self.check_for_beginner(enemy)
-        self.get_bonus_hp(attacker)
-        self.get_bonus_hp(enemy)
+    @staticmethod
+    def get_bonus(*players):
+        for player in players:
+            player.health += sum([card.health_points for card in player.card_repository])
 
-    def attack(self, pl1, pl2):
-        for card in pl1.card_repository.cards:
-            pl2.take_damage(card.damage_points)
-            # Might have to deal all cards before check for dead
-            # self.check_for_dead(pl2)  # raises ValueError, may not have to raise error
-
-    def fight(self, attacker, enemy):
-        self.prepare_for_fight(attacker, enemy)
-        self.attack(pl1=attacker, pl2=enemy)
-        self.attack(pl1=enemy, pl2=attacker)
+    @staticmethod
+    def attack(att: Player, en: Player):
+        for card in att.card_repository:
+            en.take_damage(card.damage_points)

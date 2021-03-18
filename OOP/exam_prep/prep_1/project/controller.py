@@ -12,34 +12,39 @@ class Controller:
         self.player_repository = PlayerRepository()
         self.card_repository = CardRepository()
 
-    def add_card(self, type: str, name: str):
-        card = MagicCard(name) if type == "Magic" else TrapCard(name)
-        self.card_repository.add(card)
-        return f"Successfully added card of type {type}Card with name: {name}"
-
     def add_player(self, type: str, username: str):
-        pl = Beginner(username) if type == 'Beginner' else Advanced(username)
-        self.player_repository.add(pl)
-        return f"Successfully added player of type {type} with username: {username}"
+        if type == "Beginner":
+            self.player_repository.add(Beginner(username=username))
+            return f"Successfully added player of type {type} with username: {username}"
+        elif type == 'Advanced':
+            self.player_repository.add(Advanced(username=username))
+            return f"Successfully added player of type {type} with username: {username}"
+
+    def add_card(self, type: str, name: str):
+        if type == "Magic":
+            self.card_repository.add(MagicCard(name=name))
+            return f"Successfully added card of type {type}Card with name: {name}"
+        elif type == "Trap":
+            self.card_repository.add(TrapCard(name=name))
+            return f"Successfully added card of type {type}Card with name: {name}"
 
     def add_player_card(self, username: str, card_name: str):
-        card = self.card_repository.find(card_name)
         player = self.player_repository.find(username)
+        card = self.card_repository.find(card_name)
         player.card_repository.add(card)
         return f"Successfully added card: {card_name} to user: {username}"
 
     def fight(self, attack_name: str, enemy_name: str):
-        bf = BattleField()
         attacker = self.player_repository.find(attack_name)
         enemy = self.player_repository.find(enemy_name)
-        if attacker and enemy:
-            bf.fight(attacker, enemy)
-            return f"Attack user health {attacker.health} - Enemy user health {enemy.health}"
+        bf = BattleField()
+        bf.fight(attacker, enemy)
+        return f"Attack user health {attacker.health} - Enemy user health {enemy.health}"
 
     def report(self):
-        info = ""
-        for player in self.player_repository.players:
-            info += f"Username: {player.username} - Health: {player.health} - Cards {len(player.card_repository.cards)}\n"
-            for card in player.card_repository.cards:
-                info += f"### Card: {card.name} - Damage: {card.damage_points}\n"
+        info = ''
+        for pl in self.player_repository.players:
+            info += f"Username: {pl.username} - Health: {pl.health} - Cards {pl.card_repository.count}\n"
+            for c in pl.card_repository.cards:
+                info += f"### Card: {c.name} - Damage: {c.damage_points}\n"
         return info

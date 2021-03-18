@@ -6,36 +6,32 @@ from project.card.card_repository import CardRepository
 class Player(ABC):
     @abstractmethod
     def __init__(self, username: str, health: int):
-        if username == "":
-            raise ValueError("Player's username cannot be an empty string.")
-        if health < 0:
-            raise ValueError("Player's health bonus cannot be less than zero.")
         self.username = username
-        self.card_repository = CardRepository()
         self.health = health
-
-    # @property
-    # def username(self):
-    #     return self.__username
-
-    # @username.setter
-    # def username(self, username: str):
-    #     if username == "":
-    #         raise ValueError("Player's username cannot be an empty string.")
-    #     self.__username = username
-
-    # @property
-    # def health(self):
-    #     return self.__health
-
-    # @health.setter
-    # def health(self, health: int):
-    #     if health < 0:
-    #         raise ValueError("Player's health bonus cannot be less than zero.")
-    #     self.__health = health
+        self.card_repository = CardRepository()
 
     @property
-    def is_dead(self):
+    def username(self):
+        return self.__username
+
+    @username.setter
+    def username(self, value: str):
+        if value == '':
+            raise ValueError("Player's username cannot be an empty string.")
+        self.__username = value
+
+    @property
+    def health(self):
+        return self.__health
+
+    @health.setter
+    def health(self, value: int):
+        if value < 0:
+            raise ValueError("Player's health bonus cannot be less than zero.")
+        self.__health = value
+
+    @property
+    def is_dead(self) -> bool:
         return self.health <= 0
 
     def take_damage(self, damage_points: int):

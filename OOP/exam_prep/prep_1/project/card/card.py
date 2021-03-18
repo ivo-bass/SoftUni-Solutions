@@ -13,27 +13,27 @@ class Card(ABC):
         return self.__name
 
     @name.setter
-    def name(self, name):
-        if not name:
-            raise ValueError('Card\'s name cannot be an empty string.')
-        self.__name = name
+    def name(self, value: str):
+        if value == '':
+            raise ValueError("Card's name cannot be an empty string.")
+        self.__name = value
 
     @property
     def damage_points(self):
         return self.__damage_points
 
     @damage_points.setter
-    def damage_points(self, damage_points: int):
-        if damage_points < 0:
-            raise ValueError('Card\'s damage points cannot be less than zero.')
-        self.__damage_points = damage_points
+    def damage_points(self, value: int):
+        if value < 0:
+            raise ValueError("Card's damage points cannot be less than zero.")
+        self.__damage_points = value
 
     @property
     def health_points(self):
         return self.__health_points
 
     @health_points.setter
-    def health_points(self, health_points):
-        if health_points < 0:
-            raise ValueError('Card\'s HP cannot be less than zero.')
-        self.__health_points = health_points
+    def health_points(self, value: int):
+        if value < 0:
+            raise ValueError("Card's HP cannot be less than zero.")
+        self.__health_points = value

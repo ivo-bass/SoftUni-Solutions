@@ -1,20 +1,25 @@
+from project.card.card import Card
+
+
 class CardRepository:
     def __init__(self):
         self.count = 0
-        self.cards = list()
+        self.cards = []
 
-    def add(self, card):
-        if any(c.name == card.name for c in self.cards):
-            raise ValueError(f"Card {c.name} already exists!")
+    def add(self, card: Card):
+        if self.find(card.name) is not None:
+            raise ValueError(f"Card {card.name} already exists!")
         self.cards.append(card)
         self.count += 1
 
-    def remove(self, card: str):
-        if not card:
-            raise ValueError("Player cannot be an empty string!")
-        card_found = list(filter(lambda x: x.name == card, self.cards))[0]
-        self.cards.remove(card_found)
+    def remove(self, card: str):  # ????? name or what
+        if card == '':
+            raise ValueError("Card cannot be an empty string!")
+        c = self.find(card)
+        self.cards.remove(c)
         self.count -= 1
 
-    def find(self, name: str):
-        return list(filter(lambda x: x.name == name, self.cards))[0]
+    def find(self, name: str) -> Card:
+        for c in self.cards:
+            if c.name == name:
+                return c
