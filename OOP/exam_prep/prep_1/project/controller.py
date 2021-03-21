@@ -31,8 +31,9 @@ class Controller:
     def add_player_card(self, username: str, card_name: str):
         player = self.player_repository.find(username)
         card = self.card_repository.find(card_name)
-        player.card_repository.add(card)
-        return f"Successfully added card: {card_name} to user: {username}"
+        if player and card:
+            player.card_repository.add(card)
+            return f"Successfully added card: {card_name} to user: {username}"
 
     def fight(self, attack_name: str, enemy_name: str):
         attacker = self.player_repository.find(attack_name)

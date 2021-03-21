@@ -4,7 +4,7 @@ from project.card.card_repository import CardRepository
 
 
 class Player(ABC):
-    @abstractmethod
+    # @abstractmethod
     def __init__(self, username: str, health: int):
         self.username = username
         self.health = health
@@ -16,7 +16,7 @@ class Player(ABC):
 
     @username.setter
     def username(self, value: str):
-        if value == '':
+        if not value:
             raise ValueError("Player's username cannot be an empty string.")
         self.__username = value
 

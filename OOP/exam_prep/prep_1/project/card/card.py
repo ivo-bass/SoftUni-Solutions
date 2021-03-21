@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class Card(ABC):
-    @abstractmethod
+    # @abstractmethod
     def __init__(self, name: str, damage_points: int, health_points: int):
         self.name = name
         self.damage_points = damage_points
