@@ -1,6 +1,7 @@
 from itertools import cycle
+from random import shuffle
 
-from python_advanced.wotkshop_tic_tac_toe.modules.setup import clean_board
+from python_advanced.wotkshop_tic_tac_toe.modules.setup import clean_board, Player
 from python_advanced.wotkshop_tic_tac_toe.modules.utils import *
 
 
@@ -34,11 +35,19 @@ def is_winner(board, row, col, symbol):
     return any((check_current_row, check_current_col))
 
 
+def shuffle_players(ll):
+    shuffle(ll)
+    starting_player = ll[0]
+    print_shuffling_players(starting_player.name)
+
+
 def play(board, pl1, pl2):
     board = clean_board(board)
     print_start_msg()
     show_board(board)
-    players = cycle([pl1, pl2])
+    players = [pl1, pl2]
+    shuffle_players(players)
+    players = cycle(players)
     for player in players:
         position = ask_for_position(board, player.name)
         row, col = get_coordinates(position)

@@ -71,3 +71,8 @@ def print_start_msg():
 
 def print_goodbye_msg():
     print('See you soon!')
+
+
+def print_shuffling_players(name):
+    print('Shuffling players...')
+    print(f'{name} starts first.')

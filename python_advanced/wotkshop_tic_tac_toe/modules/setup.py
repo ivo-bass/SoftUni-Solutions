@@ -3,7 +3,7 @@ from python_advanced.wotkshop_tic_tac_toe.modules.utils import *
 
 class Player:
     def __init__(self, name):
-        self.name = name
+        self.name = name.upper()
         self.symbol = ''
         self.wins = 0
 
