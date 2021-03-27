@@ -231,28 +231,3 @@ class List:
                     smallest_el = len(el)
                     smallest_index = index
         return smallest_index
-
-# ll = List('a', 1, 1, 1, None)
-# print(ll)
-# ll.append(10)
-# print(ll.append(42))
-# print(ll.remove(0))
-# l2 = List('a')
-# l3 = l2 + ll
-# print(l3)
-# for i in enumerate(ll):
-#     print(i)
-# print(l2.insert(0, 42))
-# print(ll.pop())
-# print(l2.index(42))
-# print(ll.count(1))
-# print(ll)
-# print(ll.reverse())
-#
-# llll = ll.copy()
-# print(id(ll) == id(llll))
-# print(ll.underbound())
-# print(ll.sum())
-# print(ll.move(2))
-# dd = ll.dictionize()
-# print(dd)
