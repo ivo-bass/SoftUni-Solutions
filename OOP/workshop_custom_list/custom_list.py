@@ -26,13 +26,10 @@ class List:
         return self.__list + other.__list
 
     def __eq__(self, other):
-        return len(self.__list) == len(other.__list)
-
-    def __ge__(self, other):
-        return len(self.__list) >= len(other.__list)
-
-    def __le__(self, other):
-        return len(self.__list) <= len(other.__list)
+        if type(other) is List:
+            return self.__list == other.__list
+        elif type(other) is list:
+            return self.__list == other
 
     def __len__(self):
         return len(self.__list)
@@ -42,7 +39,9 @@ class List:
 
     @staticmethod
     def __validate_iterable(iterable):
-        if not type(iterable) is list and not type(iterable) is List:
+        try:
+            _ = iter(iterable)
+        except Exception:
             raise TypeError(f'\'{iterable}\' is not na iterable')
 
     def __validate_index(self, index):
@@ -67,8 +66,9 @@ class List:
         Removes the value on the index. Returns the value removed.
         """
         self.__validate_index(index)
+        value = self.__list[index]
         self.__list = self.__list[:index] + self.__list[index + 1:]
-        return self.__list
+        return value
 
     def get(self, index):
         """
@@ -82,7 +82,8 @@ class List:
         Appends the iterable to the list. Returns the new list.
         """
         self.__validate_iterable(iterable)
-        self.__list += iterable
+        for el in iterable:
+            self.__list.append(el)
         return self.__list
 
     def insert(self, index, value):
