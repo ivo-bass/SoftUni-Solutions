@@ -1,6 +1,8 @@
 from unittest import TestCase, main
 
-from OOP.workshop_custom_list.custom_list import List
+import pytest
+
+from .custom_list import List
 
 
 class ListTest(TestCase):
