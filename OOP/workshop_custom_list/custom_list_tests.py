@@ -1,7 +1,5 @@
 from unittest import TestCase, main
 
-import pytest
-
 from .custom_list import List
 
 
