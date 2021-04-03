@@ -13,6 +13,12 @@ class ListTest(TestCase):
     def test_repr(self):
         self.assertEqual('[1, 2, 3]', str(self.ll))
 
+    def test_len(self):
+        self.assertEqual(3, len(self.ll))
+
+    def test_getitem(self):
+        self.assertEqual(3, self.ll[2])
+
     def test_add_instances(self):
         l2 = List(42)
         l3 = self.ll + l2
