@@ -1,7 +1,3 @@
-from project.supply.food_supply import FoodSupply
-from project.survivor import Survivor
-
-
 class Bunker:
     def __init__(self):
         self.survivors = []
@@ -36,7 +32,7 @@ class Bunker:
             raise IndexError("There are no salves left!")
         return salve
 
-    def add_survivor(self, survivor: Survivor):
+    def add_survivor(self, survivor):
         for s in self.survivors:
             if s.name == survivor.name:
                 raise ValueError(f"Survivor with name {s.name} already exists.")
@@ -48,7 +44,7 @@ class Bunker:
     def add_medicine(self, medicine):
         self.medicine.append(medicine)
 
-    def heal(self, survivor: Survivor, medicine_type: str):
+    def heal(self, survivor, medicine_type: str):
         med = None
         if survivor.needs_healing:
             for index in range(len(self.medicine)-1, -1, -1):
@@ -59,7 +55,7 @@ class Bunker:
                 med.apply(survivor)
                 return f"{survivor.name} healed successfully with {medicine_type}"
 
-    def sustain(self, survivor: Survivor, sustenance_type: str):
+    def sustain(self, survivor, sustenance_type: str):
         sustenance = None
         if survivor.needs_sustenance:
             for index in range(len(self.supplies)-1, -1, -1):
