@@ -99,7 +99,7 @@ class CarTest(unittest.TestCase):
         with self.assertRaises(Exception) as exc:
             self.c.make = ''
         msg = "Make cannot be null or empty!"
-        self.assertEqual(str(exc.exception), msg)
+        self.assertEqual(msg, str(exc.exception))
 
     def test_model_setter(self):
         self.c.model = 'asd'
@@ -109,7 +109,7 @@ class CarTest(unittest.TestCase):
         with self.assertRaises(Exception) as exc:
             self.c.model = ''
         msg = "Model cannot be null or empty!"
-        self.assertEqual(str(exc.exception), msg)
+        self.assertEqual(msg, str(exc.exception))
 
     def test_fuel_consumption_setter(self):
         self.c.fuel_consumption = 20
@@ -119,13 +119,13 @@ class CarTest(unittest.TestCase):
         with self.assertRaises(Exception) as exc:
             self.c.fuel_consumption = 0
         msg = "Fuel consumption cannot be zero or negative!"
-        self.assertEqual(str(exc.exception), msg)
+        self.assertEqual(msg, str(exc.exception))
 
     def test_fuel_consumption_invalid_setter_negative(self):
         with self.assertRaises(Exception) as exc:
             self.c.fuel_consumption = -1
         msg = "Fuel consumption cannot be zero or negative!"
-        self.assertEqual(str(exc.exception), msg)
+        self.assertEqual(msg, str(exc.exception))
 
     def test_fuel_capacity_setter(self):
         self.c.fuel_capacity = 20
@@ -135,13 +135,13 @@ class CarTest(unittest.TestCase):
         with self.assertRaises(Exception) as exc:
             self.c.fuel_capacity = 0
         msg = "Fuel capacity cannot be zero or negative!"
-        self.assertEqual(str(exc.exception), msg)
+        self.assertEqual(msg, str(exc.exception))
 
     def test_fuel_capacity_invalid_setter_negative(self):
         with self.assertRaises(Exception) as exc:
             self.c.fuel_capacity = -1
         msg = "Fuel capacity cannot be zero or negative!"
-        self.assertEqual(str(exc.exception), msg)
+        self.assertEqual(msg, str(exc.exception))
 
     def test_fuel_amount_setter(self):
         self.c.fuel_amount = 20
@@ -155,7 +155,7 @@ class CarTest(unittest.TestCase):
         with self.assertRaises(Exception) as exc:
             self.c.fuel_amount = -1
         msg = "Fuel amount cannot be negative!"
-        self.assertEqual(str(exc.exception), msg)
+        self.assertEqual(msg, str(exc.exception))
 
     def test_refuel(self):
         self.c.refuel(10)
@@ -170,13 +170,13 @@ class CarTest(unittest.TestCase):
         with self.assertRaises(Exception) as exc:
             self.c.refuel(0)
         msg = "Fuel amount cannot be zero or negative!"
-        self.assertEqual(str(exc.exception), msg)
+        self.assertEqual(msg, str(exc.exception))
 
     def test_refuel_with_negative_fill(self):
         with self.assertRaises(Exception) as exc:
             self.c.refuel(-1)
         msg = "Fuel amount cannot be zero or negative!"
-        self.assertEqual(str(exc.exception), msg)
+        self.assertEqual(msg, str(exc.exception))
 
     def test_drive(self):
         self.c.refuel(10)
@@ -188,7 +188,7 @@ class CarTest(unittest.TestCase):
         with self.assertRaises(Exception) as exc:
             self.c.drive(100)
         msg = "You don't have enough fuel to drive!"
-        self.assertEqual(str(exc.exception), msg)
+        self.assertEqual(msg, str(exc.exception))
 
 
 if __name__ == '__main__':

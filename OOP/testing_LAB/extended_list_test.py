@@ -55,7 +55,8 @@ class IntegerListTest(unittest.TestCase):
     def test_add_string_raises_exception(self):
         with self.assertRaises(ValueError) as exc:
             self.obj.add('42')
-        self.assertEqual(str(exc.exception), "Element is not Integer")
+        msg = "Element is not Integer"
+        self.assertEqual(msg, str(exc.exception))
 
     def test_remove_index(self):
         self.obj.add(42)
@@ -65,7 +66,8 @@ class IntegerListTest(unittest.TestCase):
         self.obj.add(42)
         with self.assertRaises(IndexError) as exc:
             self.obj.remove_index(1)
-        self.assertEqual(str(exc.exception), "Index is out of range")
+        msg = "Index is out of range"
+        self.assertEqual(msg, str(exc.exception))
 
     def test_init_takes_only_integers(self):
         ll = IntegerList('42', 42)
@@ -79,7 +81,8 @@ class IntegerListTest(unittest.TestCase):
         self.obj.add(42)
         with self.assertRaises(IndexError) as exc:
             self.obj.get(1)
-        self.assertEqual(str(exc.exception), "Index is out of range")
+        msg = "Index is out of range"
+        self.assertEqual(msg, str(exc.exception))
 
     def test_insert(self):
         self.obj.add(42)
@@ -89,13 +92,15 @@ class IntegerListTest(unittest.TestCase):
     def test_insert_raises_index_error(self):
         with self.assertRaises(IndexError) as exc:
             self.obj.insert(0, 42)
-        self.assertEqual(str(exc.exception), "Index is out of range")
+        msg = "Index is out of range"
+        self.assertEqual(msg, str(exc.exception))
 
     def test_insert_raises_value_error(self):
         self.obj.add(42)
         with self.assertRaises(ValueError) as exc:
             self.obj.insert(0, '42')
-        self.assertEqual(str(exc.exception), "Element is not Integer")
+        msg = "Element is not Integer"
+        self.assertEqual(msg, str(exc.exception))
 
     def test_get_biggest(self):
         self.obj.add(42)

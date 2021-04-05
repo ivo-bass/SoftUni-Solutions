@@ -22,15 +22,17 @@ import unittest
 
 
 class CatTests(unittest.TestCase):
+    name = 'CatName'
+
     def setUp(self) -> None:
-        self.cat = Cat('c')
+        self.cat = Cat(self.name)
 
     def test_initialize(self):
-        self.assertEqual(self.cat.name, 'c')
+        self.assertEqual(self.name, self.cat.name)
 
     def test_size_increase_after_eating(self):
         self.cat.eat()
-        self.assertEqual(self.cat.size, 1)
+        self.assertEqual(1, self.cat.size)
 
     def test_is_fed_after_eating(self):
         self.cat.eat()
@@ -40,7 +42,8 @@ class CatTests(unittest.TestCase):
         self.cat.eat()
         with self.assertRaises(Exception) as exc:
             self.cat.eat()
-        self.assertEqual(str(exc.exception), 'Already fed.')
+        msg = 'Already fed.'
+        self.assertEqual(msg, str(exc.exception))
 
     def test_becomes_sleepy_after_eating(self):
         self.cat.eat()
@@ -49,7 +52,8 @@ class CatTests(unittest.TestCase):
     def test_raises_exception_if_not_fed_when_trying_to_sleep(self):
         with self.assertRaises(Exception) as exc:
             self.cat.sleep()
-        self.assertEqual(str(exc.exception), 'Cannot sleep while hungry')
+        msg = 'Cannot sleep while hungry'
+        self.assertEqual(msg, str(exc.exception))
 
     def test_is_not_sleepy_after_sleeping(self):
         self.cat.eat()

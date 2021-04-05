@@ -55,7 +55,7 @@ class WorkerTest(unittest.TestCase):
     def test_if_energy_is_decreased_after_work(self):
         old_energy = self.w.energy
         self.w.work()
-        self.assertEqual(old_energy - self.w.energy, 1)
+        self.assertEqual(1, old_energy - self.w.energy)
 
     def test_get_info(self):
         exp = "a has saved 0 money."
