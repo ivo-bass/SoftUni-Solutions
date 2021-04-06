@@ -4,41 +4,35 @@ from project.card.trap_card import TrapCard
 
 
 class TestTrapCard(unittest.TestCase):
-    def test_init_valid_name(self):
-        a = TrapCard('a')
-        res = a.name
-        exp = 'a'
-        self.assertEqual(res, exp)
+    name = 'Name'
+    dp = 120
+    hp = 5
 
-    def test_init_invalid_name(self):
-        try:
-            a = TrapCard('')
-        except ValueError:
-            self.assertRaises(ValueError)
+    def setUp(self) -> None:
+        self.card = TrapCard(self.name)
 
-    def test_valid_health_points(self):
-        a = TrapCard('a')
-        res = a.health_points
-        exp = 5
-        self.assertEqual(res, exp)
+    def test_init(self):
+        self.assertEqual(self.name, self.card.name)
+        self.assertEqual(self.dp, self.card.damage_points)
+        self.assertEqual(self.hp, self.card.health_points)
 
-    def test_invalid_health_points(self):
-        try:
-            a = TrapCard('a', -50)
-        except TypeError:
-            self.assertRaises(TypeError)
+    def test_name__when_empty__should_raise(self):
+        with self.assertRaises(ValueError) as exc:
+            TrapCard('')
+        msg = "Card's name cannot be an empty string."
+        self.assertEqual(msg, str(exc.exception))
 
-    def test_valid_dmg_points(self):
-        a = TrapCard('a')
-        res = a.damage_points
-        exp = 120
-        self.assertEqual(res, exp)
+    def test_dp__when_negative_should_raise(self):
+        with self.assertRaises(ValueError) as exc:
+            self.card.damage_points = -1
+        msg = "Card's damage points cannot be less than zero."
+        self.assertEqual(msg, str(exc.exception))
 
-    def test_invalid_dmg_points(self):
-        try:
-            a = TrapCard('a', -50)
-        except TypeError:
-            self.assertRaises(TypeError)
+    def test_hp__when_negative__should_raise(self):
+        with self.assertRaises(ValueError) as exc:
+            self.card.health_points = -1
+        msg = "Card's HP cannot be less than zero."
+        self.assertEqual(msg, str(exc.exception))
 
 
 if __name__ == '__main__':

@@ -7,67 +7,51 @@ from project.player.beginner import Beginner
 
 
 class TestBattleField(unittest.TestCase):
-    def test_init(self):
-        bf = BattleField()
-        self.assertIsInstance(bf, BattleField)
+    def setUp(self) -> None:
+        self.bf = BattleField()
 
-    def test_fight_with_dead_player(self):
-        bf = BattleField()
-        att = Advanced('a')
-        en = Beginner('b')
-        en.take_damage(50)
-        try:
-            bf.fight(att, en)
-        except ValueError:
-            self.assertRaises(ValueError)
+    def test_fight__when_dead_player__should_raise(self):
+        attacker = Advanced('a')
+        enemy = Beginner('b')
+        enemy.take_damage(50)
+        with self.assertRaises(ValueError):
+            self.bf.fight(attacker, enemy)
 
     def test_increase_beginner_health(self):
-        bf = BattleField()
-        att = Beginner('a')
-        en = Beginner('b')
-        bf.fight(att, en)
-        res = att.health
-        exp = 90
-        self.assertEqual(res, exp)
+        attacker = Beginner('a')
+        enemy = Beginner('e')
+        self.bf.fight(attacker, enemy)
+        self.assertEqual(90, attacker.health)
 
     def test_increase_dmg_points_for_cards(self):
-        bf = BattleField()
-        att = Beginner('a')
+        attacker = Beginner('a')
         card1 = MagicCard('mc1')
         card2 = MagicCard('mc2')
-        att.card_repository.cards.append(card1)
-        att.card_repository.cards.append(card2)
-        en = Beginner('b')
-        bf.fight(att, en)
-        res = sum(card.damage_points for card in att.card_repository.cards)
-        exp = 70
-        self.assertEqual(res, exp)
+        attacker.card_repository.cards.append(card1)
+        attacker.card_repository.cards.append(card2)
+        enemy = Beginner('e')
+        self.bf.fight(attacker, enemy)
+        self.assertEqual(70, sum(card.damage_points for card in attacker.card_repository.cards))
 
     def test_get_bonus(self):
-        bf = BattleField()
-        att = Beginner('a')
+        attacker = Beginner('a')
         card1 = MagicCard('mc1')
         card2 = MagicCard('mc2')
-        att.card_repository.cards.append(card1)
-        att.card_repository.cards.append(card2)
-        en = Beginner('b')
-        bf.fight(att, en)
-        res = att.health
-        exp = 250
-        self.assertEqual(res, exp)
+        attacker.card_repository.cards.append(card1)
+        attacker.card_repository.cards.append(card2)
+        enemy = Beginner('e')
+        self.bf.fight(attacker, enemy)
+        self.assertEqual(250, attacker.health)
 
     def test_attack(self):
-        bf = BattleField()
-        att = Beginner('a')
+        attacker = Beginner('a')
         card1 = MagicCard('mc1')
         card2 = MagicCard('mc2')
-        att.card_repository.cards.append(card1)
-        att.card_repository.cards.append(card2)
-        en = Beginner('b')
-        bf.fight(att, en)
-        res = en.health
-        exp = 20
-        self.assertEqual(res, exp)
+        attacker.card_repository.cards.append(card1)
+        attacker.card_repository.cards.append(card2)
+        enemy = Beginner('b')
+        self.bf.fight(attacker, enemy)
+        self.assertEqual(20, enemy.health)
 
 
 if __name__ == '__main__':

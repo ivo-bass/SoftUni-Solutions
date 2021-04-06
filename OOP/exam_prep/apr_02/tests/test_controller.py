@@ -8,90 +8,71 @@ from project.player.player_repository import PlayerRepository
 
 
 class TestController(unittest.TestCase):
-    def test_init(self):
-        c = Controller()
-        self.assertIsInstance(c, Controller)
+    def setUp(self) -> None:
+        self.controller = Controller()
 
-    def test_inti_card_repo(self):
-        c = Controller()
-        try:
-            cr = c.card_repository
-            self.assertIsInstance(cr, CardRepository)
-        except AttributeError:
-            self.assertRaises(AttributeError)
+    def test_inti(self):
+        self.assertIsInstance(self.controller.player_repository, PlayerRepository)
+        self.assertIsInstance(self.controller.card_repository, CardRepository)
 
-    def test_inti_player_repo(self):
-        c = Controller()
-        try:
-            cr = c.player_repository
-            self.assertIsInstance(cr, PlayerRepository)
-        except AttributeError:
-            self.assertRaises(AttributeError)
 
     def test_add_player(self):
-        c = Controller()
-        c.add_player('Beginner', 'b')
-        res = c.player_repository.players[0]
-        self.assertIsInstance(res, Beginner)
+        self.controller.add_player('Beginner', 'b')
+        self.assertIsInstance(self.controller.player_repository.players[0], Beginner)
 
     def test_add_player_msg(self):
-        c = Controller()
-        res = c.add_player('Beginner', 'b')
         exp = "Successfully added player of type Beginner with username: b"
-        self.assertEqual(res, exp)
+        res = self.controller.add_player('Beginner', 'b')
+        self.assertEqual(exp, res)
 
     def test_add_card(self):
-        c = Controller()
-        c.add_card('Trap', 'b')
-        res = c.card_repository.cards[0]
+        self.controller.add_card('Trap', 'b')
+        res = self.controller.card_repository.cards[0]
         self.assertIsInstance(res, TrapCard)
 
     def test_add_card_msg(self):
-        c = Controller()
-        res = c.add_card('Trap', 'b')
         exp = "Successfully added card of type TrapCard with name: b"
-        self.assertEqual(res, exp)
-
-    def test_add_player_card(self):
-        c = Controller()
-        c.add_player('Beginner', 'b')
-        c.add_card('Trap', 't')
-        c.add_player_card('b', 't')
-        res = c.player_repository.players[0].card_repository.cards[0].name
-        exp = 't'
+        res = self.controller.add_card('Trap', 'b')
         self.assertEqual(exp, res)
 
+    def test_add_player_card(self):
+        self.controller.add_player('Beginner', 'b')
+        self.controller.add_card('Trap', 't')
+        self.controller.add_player_card('b', 't')
+        res = self.controller.player_repository.players[0].card_repository.cards[0].name
+
+        self.assertEqual('t', res)
+
     def test_add_player_card_msg(self):
-        c = Controller()
-        c.add_player('Beginner', 'b')
-        c.add_card('Trap', 't')
-        res = c.add_player_card('b', 't')
+        self.controller.add_player('Beginner', 'b')
+        self.controller.add_card('Trap', 't')
         exp = "Successfully added card: t to user: b"
+        res = self.controller.add_player_card('b', 't')
+
         self.assertEqual(exp, res)
 
     def test_fight(self):
-        c = Controller()
-        c.add_player('Beginner', 'b1')
-        c.add_player('Beginner', 'b2')
-        res = c.fight('b1', 'b2')
+        self.controller.add_player('Beginner', 'b1')
+        self.controller.add_player('Beginner', 'b2')
         exp = "Attack user health 90 - Enemy user health 90"
-        self.assertEqual(res, exp)
+        res = self.controller.fight('b1', 'b2')
+
+        self.assertEqual(exp, res)
 
     def test_report(self):
-        c = Controller()
-        c.add_player('Beginner', 'b1')
-        c.add_player('Beginner', 'b2')
-        c.add_card('Trap', 't1')
-        c.add_card('Trap', 't2')
-        c.add_player_card('b1', 't1')
-        c.add_player_card('b2', 't2')
-        res = c.report()
+        self.controller.add_player('Beginner', 'b1')
+        self.controller.add_player('Beginner', 'b2')
+        self.controller.add_card('Trap', 't1')
+        self.controller.add_card('Trap', 't2')
+        self.controller.add_player_card('b1', 't1')
+        self.controller.add_player_card('b2', 't2')
+        res = self.controller.report()
         exp = """Username: b1 - Health: 50 - Cards 1
 ### Card: t1 - Damage: 120
 Username: b2 - Health: 50 - Cards 1
 ### Card: t2 - Damage: 120
 """
-        self.assertEqual(res, exp)
+        self.assertEqual(exp, res)
 
 
 if __name__ == '__main__':
