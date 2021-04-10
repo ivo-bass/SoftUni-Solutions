@@ -17,16 +17,8 @@ class Controller:
         self.aquariums = []
 
     @staticmethod
-    def __is_valid_aquarium_type(aquarium_type):
-        return aquarium_type in VALID_AQUARIUM_TYPES
-
-    @staticmethod
-    def __is_valid_decoration_type(decoration_type):
-        return decoration_type in VALID_DECORATION_TYPES
-
-    @staticmethod
-    def __is_valid_fish_type(fish_type):
-        return fish_type in VALID_FISH_TYPES
+    def __is_valid_type(type_of_object, valid_types):
+        return type_of_object in valid_types
 
     @staticmethod
     def __create_aquarium(aquarium_name, aquarium_type):
@@ -63,14 +55,14 @@ class Controller:
         return aquarium
 
     def add_aquarium(self, aquarium_type: str, aquarium_name: str):
-        if not self.__is_valid_aquarium_type(aquarium_type):
+        if not self.__is_valid_type(aquarium_type, VALID_AQUARIUM_TYPES):
             return 'Invalid aquarium type.'
         aquarium = self.__create_aquarium(aquarium_name, aquarium_type)
         self.aquariums.append(aquarium)
         return f'Successfully added {aquarium_type}.'
 
     def add_decoration(self, decoration_type: str):
-        if not self.__is_valid_decoration_type(decoration_type):
+        if not self.__is_valid_type(decoration_type, VALID_DECORATION_TYPES):
             return 'Invalid decoration type.'
         decoration = self.__create_decoration(decoration_type)
         self.decorations_repository.add(decoration)
@@ -87,7 +79,7 @@ class Controller:
             return f"There isn't a decoration of type {decoration_type}."
 
     def add_fish(self, aquarium_name: str, fish_type: str, fish_name: str, fish_species: str, price: float):
-        if not self.__is_valid_fish_type(fish_type):
+        if not self.__is_valid_type(fish_type, VALID_FISH_TYPES):
             return f"There isn't a fish of type {fish_type}."
         fish = self.__create_fish(fish_type, fish_name, fish_species, price)
         aquarium = self.__find_aquarium(aquarium_name)
